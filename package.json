@@ -1,0 +1,39 @@
+{
+  "name": "rootline",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Rootline Technology — Monorepo",
+  "packageManager": "pnpm@10.33.2",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:user": "pnpm -F @rootline/user dev",
+    "dev:admin": "pnpm -F @rootline/admin dev",
+    "dev:api": "pnpm -F @rootline/api dev",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\" --ignore-path .gitignore",
+    "db:generate": "pnpm -F @rootline/api exec prisma generate",
+    "db:migrate": "pnpm -F @rootline/api exec prisma migrate dev",
+    "db:seed": "pnpm -F @rootline/api exec tsx prisma/seed.ts",
+    "db:reset": "pnpm -F @rootline/api exec prisma migrate reset --force"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/engines",
+      "prisma",
+      "esbuild"
+    ]
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "prettier": "^3.3.3",
+    "turbo": "^2.3.3",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,19 @@
+node_modules
+# Keep environment variables out of version control
+.env
+.env.docker
+.env.docker.local
+
+/generated/prisma
+
+dist
+build
+/src/generated/prisma
+
+
+.claude
+CLAUDE.md
+.dev-notes.md
+
+docker.env
+AEORanker API.postman_collection.json

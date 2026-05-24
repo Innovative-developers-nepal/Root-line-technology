@@ -1,0 +1,31 @@
+{
+  "name": "@rootline/validators",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./auth": "./src/auth.ts",
+    "./user": "./src/user.ts",
+    "./organization": "./src/organization.ts",
+    "./contact": "./src/contact.ts",
+    "./blog": "./src/blog.ts",
+    "./caseStudy": "./src/caseStudy.ts",
+    "./service": "./src/service.ts",
+    "./team": "./src/team.ts",
+    "./job": "./src/job.ts",
+    "./application": "./src/application.ts"
+  },
+  "scripts": {
+    "lint": "echo \"lint not configured\" && exit 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@rootline/tsconfig": "workspace:*",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@rootline/auth-client",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "echo \"lint not configured\" && exit 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@rootline/utils": "workspace:*",
+    "better-auth": "^1.1.13"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@rootline/tsconfig": "workspace:*",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.9.3"
+  }
+}

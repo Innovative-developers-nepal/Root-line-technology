@@ -1,0 +1,27 @@
+{
+  "name": "@rootline/analytics",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.tsx"
+  },
+  "scripts": {
+    "lint": "echo \"lint not configured\" && exit 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "posthog-js": "^1.205.0"
+  },
+  "peerDependencies": {
+    "next": "^15.0.0",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@rootline/tsconfig": "workspace:*",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.9.3"
+  }
+}

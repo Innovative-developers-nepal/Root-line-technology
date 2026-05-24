@@ -1,0 +1,276 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id               String   @id @default(uuid())
+  email            String   @unique
+  passwordHash     String?
+  firstName        String
+  lastName         String
+  avatar           String?
+  emailVerified    Boolean  @default(false)
+  twoFactorEnabled Boolean  @default(false)
+  twoFactorSecret  String?
+  status           String   @default("ACTIVE")
+  lastLoginAt      DateTime?
+  roleId           String?
+  role             Role?        @relation(fields: [roleId], references: [id])
+  refreshTokens    RefreshToken[]
+  sessions         Session[]
+  accounts         Account[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  deletedAt        DateTime?
+
+  @@index([email])
+  @@index([deletedAt])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([token])
+  @@map("sessions")
+}
+
+model Account {
+  id                    String    @id @default(cuid())
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@unique([providerId, accountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verifications")
+}
+
+model RefreshToken {
+  id            String   @id @default(uuid())
+  token         String   @unique
+  userID        String
+  user          User     @relation(fields: [userID], references: [id])
+  expiresAt     DateTime
+  isBlacklisted Boolean  @default(false)
+  createdAt     DateTime @default(now())
+}
+
+model Role {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  displayName String
+  description String?
+  isSystem    Boolean          @default(false)
+  hierarchy   Int              @unique
+  permissions RolePermission[]
+  users       User[]
+}
+
+model Permission {
+  id          String           @id @default(uuid())
+  resource    String
+  action      String
+  description String?
+  roles       RolePermission[]
+
+  @@unique([resource, action])
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id])
+  permission   Permission @relation(fields: [permissionId], references: [id])
+
+  @@id([roleId, permissionId])
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String
+  subject   String
+  message   String
+  status    String   @default("PENDING")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model BlogPost {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  excerpt     String
+  content     String
+  coverImage  String?
+  category    String
+  tags        String
+  author      String
+  readTime    String
+  published   Boolean   @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([slug])
+  @@index([published])
+  @@index([category])
+  @@index([createdAt])
+  @@map("blog_posts")
+}
+
+model Service {
+  id             String    @id @default(cuid())
+  slug           String    @unique
+  title          String
+  summary        String
+  body           String
+  iconKey        String?
+  order          Int       @default(0)
+  published      Boolean   @default(false)
+  publishedAt    DateTime?
+  seoTitle       String?
+  seoDescription String?
+  ogImage        String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([slug])
+  @@index([published])
+  @@index([order])
+  @@map("services")
+}
+
+model TeamMember {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  bio         String?
+  avatar      String?
+  socialLinks String?
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([order])
+  @@index([published])
+  @@map("team_members")
+}
+
+model Job {
+  id           String           @id @default(cuid())
+  slug         String           @unique
+  title        String
+  department   String?
+  location     String
+  type         String           @default("FULL_TIME")
+  body         String
+  salaryRange  String?
+  isOpen       Boolean          @default(true)
+  postedAt     DateTime         @default(now())
+  applications JobApplication[]
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  @@index([slug])
+  @@index([isOpen])
+  @@index([createdAt])
+  @@map("jobs")
+}
+
+model JobApplication {
+  id         String   @id @default(cuid())
+  jobId      String
+  job        Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  firstName  String
+  lastName   String
+  email      String
+  phone      String?
+  coverNote  String?
+  resumeFile String
+  status     String   @default("NEW")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([jobId])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+  @@map("job_applications")
+}
+
+model CaseStudy {
+  id                 String    @id @default(cuid())
+  slug               String    @unique
+  title              String
+  subtitle           String?
+  excerpt            String
+  category           String
+  industry           String
+  author             String
+  authorTitle        String?
+  readTime           String
+  coverImage         String?
+  tags               String
+  metrics            String
+  summaryStats       String
+  bottomStats        String
+  graphs             String
+  tableOfContents    String
+  overviewContent    String
+  keyWinsContent     String
+  keyInsightContent  String
+  challengeSolutions String
+  published          Boolean   @default(false)
+  publishedAt        DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([slug])
+  @@index([published])
+  @@index([category])
+  @@index([industry])
+  @@index([createdAt])
+  @@map("case_studies")
+}

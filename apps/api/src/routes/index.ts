@@ -1,0 +1,12 @@
+export { default as authRoutes } from "./auth.routes";
+export { default as userRoutes } from "./user.routes";
+export { default as healthRoutes } from "./health.routes";
+export { default as dashboardRoutes } from "./dashboard.routes";
+export { default as contactRoutes } from "./contact.routes";
+export { default as blogRoutes } from "./blog.routes";
+export { default as caseStudyRoutes } from "./caseStudy.routes";
+export { default as uploadRoutes } from "./upload.routes";
+export { default as serviceRoutes } from "./service.routes";
+export { default as teamRoutes } from "./team.routes";
+export { default as jobRoutes } from "./job.routes";
+export { default as applicationRoutes } from "./application.routes";

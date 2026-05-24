@@ -1,0 +1,7 @@
+{
+  "name": "@rootline/config-tailwind",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./preset.js",
+  "files": ["preset.js", "tokens.css"]
+}

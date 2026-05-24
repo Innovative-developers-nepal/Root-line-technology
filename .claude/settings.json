@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "model": "claude-opus-4-7",
+  "env": {
+    "FORCE_COLOR": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(pnpm:*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm run:*)",
+      "Bash(pnpm exec:*)",
+      "Bash(pnpm -F *)",
+      "Bash(pnpm -w *)",
+      "Bash(npx prisma:*)",
+      "Bash(npx shadcn:*)",
+      "Bash(npx shadcn@latest:*)",
+      "Bash(turbo run:*)",
+      "Bash(node:*)",
+      "Bash(tsc:*)",
+      "Bash(tsx:*)",
+      "Bash(git status)",
+      "Bash(git status:*)",
+      "Bash(git diff)",
+      "Bash(git diff:*)",
+      "Bash(git log)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git init:*)",
+      "Bash(git mv:*)",
+      "Bash(mkdir:*)",
+      "Bash(ls:*)",
+      "PowerShell(Get-ChildItem:*)",
+      "PowerShell(New-Item:*)",
+      "PowerShell(Move-Item:*)",
+      "Edit",
+      "Write",
+      "Read",
+      "Glob",
+      "Grep"
+    ],
+    "deny": [
+      "Bash(rm -rf /:*)",
+      "Bash(rm -rf ~:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean -f:*)",
+      "Bash(prisma migrate reset:*)",
+      "Bash(npx prisma migrate reset:*)"
+    ]
+  }
+}

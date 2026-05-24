@@ -1,0 +1,26 @@
+{
+  "name": "@rootline/storage",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "echo \"lint not configured\" && exit 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@rootline/api-client": "workspace:*",
+    "@tanstack/react-query": "^5.62.7"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@rootline/tsconfig": "workspace:*",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.9.3"
+  }
+}

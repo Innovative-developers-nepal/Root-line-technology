@@ -1,0 +1,5 @@
+{
+  "extends": "@rootline/tsconfig/react-library.json",
+  "compilerOptions": { "noEmit": true },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

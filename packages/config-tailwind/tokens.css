@@ -1,0 +1,84 @@
+/* Rootline design tokens — Tailwind v4 @theme block.
+ * Import this once at the root of each app's globals.css:
+ *   @import "@rootline/config-tailwind/tokens.css";
+ */
+
+@theme {
+  --color-background:             hsl(0 0% 100%);
+  --color-foreground:             hsl(20 14% 12%);
+  --color-primary:                hsl(140 55% 38%);
+  --color-primary-foreground:     hsl(140 60% 98%);
+  --color-accent:                 hsl(27 51% 28%);
+  --color-accent-foreground:      hsl(60 30% 96%);
+  --color-secondary:              hsl(30 8% 95%);
+  --color-secondary-foreground:   hsl(20 14% 12%);
+  --color-muted:                  hsl(30 8% 95%);
+  --color-muted-foreground:       hsl(30 8% 40%);
+  --color-border:                 hsl(30 10% 88%);
+  --color-input:                  hsl(30 10% 88%);
+  --color-ring:                   hsl(140 55% 38%);
+  --color-card:                   hsl(0 0% 100%);
+  --color-card-foreground:        hsl(20 14% 12%);
+  --color-popover:                hsl(0 0% 100%);
+  --color-popover-foreground:     hsl(20 14% 12%);
+  --color-destructive:            hsl(0 70% 45%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+
+  --radius-sm: calc(0.375rem - 2px);
+  --radius:    0.375rem;
+  --radius-md: 0.375rem;
+  --radius-lg: calc(0.375rem + 2px);
+  --radius-xl: calc(0.375rem + 4px);
+
+  --font-display: var(--font-geist-sans), var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans:    var(--font-inter), var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --container-content: 72rem;
+}
+
+@layer base {
+  :root { color-scheme: light; }
+
+  .dark {
+    --color-background:             hsl(20 14% 8%);
+    --color-foreground:             hsl(60 20% 94%);
+    --color-primary:                hsl(135 60% 58%);
+    --color-primary-foreground:     hsl(140 60% 8%);
+    --color-accent:                 hsl(27 45% 55%);
+    --color-accent-foreground:      hsl(27 50% 8%);
+    --color-secondary:              hsl(20 10% 16%);
+    --color-secondary-foreground:   hsl(60 20% 94%);
+    --color-muted:                  hsl(20 10% 16%);
+    --color-muted-foreground:       hsl(30 8% 65%);
+    --color-border:                 hsl(20 10% 20%);
+    --color-input:                  hsl(20 10% 20%);
+    --color-ring:                   hsl(135 60% 58%);
+    --color-card:                   hsl(20 14% 10%);
+    --color-card-foreground:        hsl(60 20% 94%);
+    --color-popover:                hsl(20 14% 10%);
+    --color-popover-foreground:     hsl(60 20% 94%);
+    color-scheme: dark;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: hsl(var(--color-primary) / 0.2);
+  }
+}

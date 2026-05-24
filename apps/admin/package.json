@@ -1,0 +1,50 @@
+{
+  "name": "@rootline/admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "prebuild": "",
+    "build": "cross-env NEXT_DIST_DIR=.next-build next build",
+    "start": "next start -p 3001",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@rootline/ui": "workspace:*",
+    "@rootline/config-tailwind": "workspace:*",
+    "@rootline/utils": "workspace:*",
+    "@rootline/hooks": "workspace:*",
+    "@rootline/validators": "workspace:*",
+    "@rootline/api-client": "workspace:*",
+    "@rootline/auth-client": "workspace:*",
+    "@rootline/storage": "workspace:*",
+    "@rootline/seo": "workspace:*",
+    "@rootline/analytics": "workspace:*",
+    "@tanstack/react-query": "^5.62.7",
+    "geist": "^1.4.2",
+    "next": "^15.1.0",
+    "next-themes": "^0.4.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
+    "@hookform/resolvers": "^3.9.1",
+    "@radix-ui/react-dialog": "^1.1.4",
+    "@radix-ui/react-dropdown-menu": "^2.1.4",
+    "lucide-react": "^0.469.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@rootline/tsconfig": "workspace:*",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^4.0.0-beta.7",
+    "@tailwindcss/postcss": "^4.0.0-beta.7",
+    "eslint": "^9.16.0",
+    "eslint-config-next": "^15.1.0",
+    "typescript": "^5.9.3"
+  }
+}

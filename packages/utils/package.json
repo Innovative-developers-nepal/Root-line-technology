@@ -1,0 +1,21 @@
+{
+  "name": "@rootline/utils",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "echo \"lint not configured\" && exit 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0"
+  },
+  "devDependencies": {
+    "@rootline/tsconfig": "workspace:*",
+    "typescript": "^5.9.3"
+  }
+}
