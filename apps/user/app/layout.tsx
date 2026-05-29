@@ -8,6 +8,8 @@ import { buildMetadata, organizationJsonLd, websiteJsonLd, renderJsonLd } from "
 import { Providers } from "@/components/providers";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { CookieConsent } from "@/components/cookie-consent";
+import { GrainOverlay } from "@rootline/ui/blocks";
 import { PageViewTracker } from "@rootline/analytics";
 
 const inter = Inter({
@@ -34,6 +36,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <PageViewTracker />
           </Suspense>
         </Providers>
+        <CookieConsent />
+        <GrainOverlay intensity="soft" blend="normal" className="fixed z-30 opacity-[0.18]" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

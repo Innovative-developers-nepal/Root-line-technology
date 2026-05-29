@@ -16,6 +16,7 @@ export type BlogPost = {
   readTime: string;
   published: boolean;
   publishedAt: string | null;
+  shareCount: number;
   createdAt: string;
   updatedAt: string;
 };

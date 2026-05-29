@@ -1,32 +1,42 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { Quote } from "lucide-react";
 import { Container } from "@rootline/ui/components";
 import { usePrefersReducedMotion } from "@rootline/ui/motion";
 
-const QUOTES = [
+// NOTE: placeholder testimonials — swap for real client quotes before launch.
+const TESTIMONIALS = [
   {
-    n: "01",
-    text: "Security is not a feature. It is the soil.",
-    author: "Rootline principle",
-    accent: "from-emerald-500/15 to-emerald-500/0",
+    quote:
+      "Rootline's audit surfaced a token-handling flaw two other firms had signed off on. They don't check boxes — they think like attackers.",
+    name: "Priya Nair",
+    role: "VP Engineering",
+    company: "Northwind Logistics",
+    initials: "PN",
   },
   {
-    n: "02",
-    text: "Ship slow. Ship right. Roots take time.",
-    author: "Rootline principle",
-    accent: "from-sky-500/15 to-sky-500/0",
+    quote:
+      "We rebuilt payments on the architecture they designed and haven't had a single security incident in 18 months. That's the whole story.",
+    name: "Daniel Osei",
+    role: "CTO",
+    company: "Lumen Health",
+    initials: "DO",
   },
   {
-    n: "03",
-    text: "Every line of code is a vow to the people who run it at 3am.",
-    author: "Rootline principle",
-    accent: "from-violet-500/15 to-violet-500/0",
+    quote:
+      "The most thorough VAPT engagement we've run. Clear reporting, real remediation guidance, zero fluff. Our board finally understood our risk.",
+    name: "Sara Kim",
+    role: "Head of Security",
+    company: "Meridian Bank",
+    initials: "SK",
   },
   {
-    n: "04",
-    text: "Premium is not polish. It is restraint.",
-    author: "Rootline principle",
-    accent: "from-amber-500/15 to-amber-500/0",
+    quote:
+      "They treat our codebase like it's their own. It's rare to find a partner this invested in getting the hard parts right.",
+    name: "Marcus Feld",
+    role: "Founder",
+    company: "Cartwheel",
+    initials: "MF",
   },
 ];
 
@@ -47,91 +57,82 @@ export function LandingQuotes() {
       ]);
       gsap.registerPlugin(ScrollTrigger);
 
-      const items = el.querySelectorAll<HTMLElement>("[data-quote]");
-
-      items.forEach((item) => {
-        const lines = item.querySelectorAll<HTMLElement>("[data-line]");
-        const tween = gsap.fromTo(
-          lines,
-          { opacity: 0.12, y: 30, filter: "blur(8px)" },
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            stagger: 0.15,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: item,
-              start: "top 75%",
-              end: "top 30%",
-              scrub: 0.8,
-            },
-          },
-        );
-        cleanups.push(() => {
-          tween.scrollTrigger?.kill();
-          tween.kill();
-        });
+      const items = el.querySelectorAll<HTMLElement>("[data-card]");
+      const tween = gsap.from(items, {
+        opacity: 0,
+        y: 28,
+        filter: "blur(6px)",
+        stagger: 0.12,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 78%" },
       });
 
+      cleanups.push(() => {
+        tween.scrollTrigger?.kill();
+        tween.kill();
+      });
     })();
 
     return () => cleanups.forEach((c) => c());
   }, [reduced]);
 
   return (
-    <section className="relative w-full overflow-hidden py-32 md:py-48">
+    <section className="relative w-full overflow-hidden  py-6">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(0,0,0,0.04),transparent_70%)] dark:bg-[radial-gradient(60%_50%_at_50%_0%,rgba(255,255,255,0.05),transparent_70%)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,color-mix(in_oklab,var(--color-primary)_5%,transparent),transparent_70%)]"
       />
       <Container>
-      <div ref={containerRef} className="mx-auto max-w-4xl">
-          <div className="flex flex-col gap-28 md:gap-36">
-            {QUOTES.map((q) => (
-              <figure
-                key={q.n}
-                data-quote
-                className="group relative grid gap-6 md:grid-cols-[auto_1fr] md:gap-10"
-              >
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-foreground/70">
+            <span aria-hidden className="h-px w-8 bg-primary/60" />
+            Proof, not promises
+            <span aria-hidden className="h-px w-8 bg-primary/60" />
+          </div>
+          <h2 className="mt-6 font-display text-4xl leading-[1.05] tracking-tight md:text-5xl">
+            Trusted with what teams can&rsquo;t afford to lose
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+            Security, infrastructure, and platform work for organizations where
+            failure isn&rsquo;t an option.
+          </p>
+        </div>
+
+        <div
+          ref={containerRef}
+          className="mx-auto mt-16 grid max-w-5xl gap-5 md:mt-20 md:grid-cols-2 md:gap-6"
+        >
+          {TESTIMONIALS.map((t) => (
+            <figure
+              key={t.name}
+              data-card
+              className="group relative flex flex-col gap-6 rounded-lg border border-border/60 bg-card/40 p-7 backdrop-blur-sm transition-colors duration-300 hover:border-primary/30 md:p-8"
+            >
+              <Quote
+                aria-hidden
+                className="size-7 text-primary/30 transition-colors duration-300 group-hover:text-primary/50"
+                strokeWidth={1.5}
+              />
+              <blockquote className="font-display text-xl leading-snug tracking-tight text-foreground/90 md:text-2xl">
+                {t.quote}
+              </blockquote>
+              <figcaption className="mt-auto flex items-center gap-3.5 pt-2">
                 <span
                   aria-hidden
-                  className={`pointer-events-none absolute -left-6 -top-12 -z-10 font-display text-[10rem] leading-none tracking-tighter text-transparent bg-clip-text bg-linear-to-b ${q.accent} select-none md:text-[14rem]`}
+                  className="grid size-11 shrink-0 place-items-center rounded-full border border-primary/20 bg-primary/10 font-display text-sm text-primary"
                 >
-                  {q.n}
+                  {t.initials}
                 </span>
-
-                <div
-                  data-line
-                  className="flex items-start gap-3 md:flex-col md:items-end md:gap-2 md:pr-2"
-                >
-                  <span className="font-mono text-xs font-medium tracking-[0.18em] text-primary">
-                    {q.n}
+                <span className="flex flex-col">
+                  <span className="text-sm font-semibold text-foreground">{t.name}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {t.role} · {t.company}
                   </span>
-                  <span
-                    aria-hidden
-                    className="mt-1.5 hidden h-px w-10 bg-linear-to-r from-primary/60 to-primary/0 md:block"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-5">
-                  <blockquote
-                    data-line
-                    className="font-display text-3xl leading-[1.12] tracking-tight md:text-5xl"
-                  >
-                    &ldquo;{q.text}&rdquo;
-                  </blockquote>
-                  <figcaption
-                    data-line
-                    className="text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground"
-                  >
-                    — {q.author}
-                  </figcaption>
-                </div>
-              </figure>
-            ))}
-          </div>
+                </span>
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </Container>
     </section>

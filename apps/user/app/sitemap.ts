@@ -5,7 +5,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const staticRoutes = ["", "/about", "/services", "/careers", "/contact", "/blog"];
+  const staticRoutes = ["", "/about", "/services", "/careers", "/contact", "/blog", "/privacy", "/terms"];
 
   const [blogs, jobs] = await Promise.all([
     listAllBlogSlugs().catch(() => []),

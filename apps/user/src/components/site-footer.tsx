@@ -6,9 +6,12 @@ export function SiteFooter() {
     <>
       <Footer
         brand={
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-3">
             <span className="font-display text-2xl">Rootline Technology</span>
             <span className="text-sm text-muted-foreground">{SITE.tagline}</span>
+            <span className="mt-2 text-xs text-muted-foreground">
+              © {new Date().getFullYear()} Rootline Technology Pvt Ltd.
+            </span>
           </div>
         }
         columns={[
@@ -29,11 +32,17 @@ export function SiteFooter() {
             ],
           },
           {
+            heading: "Legal",
+            links: [
+              { label: "Privacy Policy", href: "/privacy" },
+              { label: "Terms of Service", href: "/terms" },
+            ],
+          },
+          {
             heading: "Contact",
             links: [{ label: SITE.contact.email, href: `mailto:${SITE.contact.email}` }],
           },
         ]}
-        legal={<span>© {new Date().getFullYear()} Rootline Technology Pvt Ltd.</span>}
       />
       <script
         type="application/ld+json"

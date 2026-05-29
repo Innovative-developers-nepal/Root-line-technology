@@ -69,6 +69,7 @@ rootline/                              ← workspace root
 13. **Validators shared.** Backend zod schemas re-exported from `@rootline/validators`.
 14. **Cursor pagination** on lists. Offset only for admin if explicitly justified.
 15. **Respect `prefers-reduced-motion`.** Motion always guarded.
+16. **No "AI-slop" typography or decoration.** Don't use em-dashes (—), middle dots (·), bullet separators (•), or ellipses (…) in UI copy or as separators. Don't use the little `h-px w-8` accent "dash/line" as an eyebrow decoration. Prefer plain spacing, commas, or a proper element (e.g. a pill/badge) instead — these tells read as vibe-coded.
 
 ## Workflow
 

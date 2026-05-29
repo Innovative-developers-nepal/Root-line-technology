@@ -10,6 +10,7 @@ import {
   Mail,
   UserCog,
   Inbox,
+  MessageSquare,
 } from "lucide-react";
 import { cn } from "@rootline/ui/lib/cn";
 
@@ -20,6 +21,7 @@ const ITEMS = [
   { label: "Jobs", href: "/jobs", icon: Briefcase },
   { label: "Applicants", href: "/applicants", icon: Inbox },
   { label: "Blog", href: "/blog", icon: FileText },
+  { label: "Comments", href: "/comments", icon: MessageSquare },
   { label: "Contacts", href: "/contacts", icon: Mail },
   { label: "Users", href: "/users", icon: UserCog },
 ] as const;

@@ -24,6 +24,7 @@
     "@rootline/ui": "workspace:*",
     "@rootline/utils": "workspace:*",
     "@rootline/validators": "workspace:*",
+    "@tailwindcss/typography": "^0.5.19",
     "@tanstack/react-query": "^5.62.7",
     "@tanstack/react-query-devtools": "^5.62.7",
     "framer-motion": "^12.0.0",

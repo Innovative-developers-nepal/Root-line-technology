@@ -2,13 +2,13 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib/cn";
 
-const containerStyles = cva("mx-auto w-full px-6 lg:px-8", {
+const containerStyles = cva("mx-auto w-full px-6 sm:px-8 lg:px-12 xl:px-16", {
   variants: {
     size: {
-      sm: "max-w-3xl",
-      md: "max-w-5xl",
-      lg: "max-w-6xl",
-      xl: "max-w-7xl",
+      sm: "max-w-[48rem]",
+      md: "max-w-[64rem]",
+      lg: "max-w-[72rem]",
+      xl: "max-w-[80rem]",
       full: "max-w-none",
     },
   },

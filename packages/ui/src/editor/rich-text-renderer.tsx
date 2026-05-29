@@ -3,7 +3,7 @@ import { generateHTML } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { cn } from "../lib/cn";
 import type { TiptapJson } from "./rich-text-editor";
 
@@ -14,14 +14,19 @@ export function RichTextRenderer({
   content: TiptapJson | null | undefined;
   className?: string;
 }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const html = useMemo(() => {
-    if (!content) return "";
+    if (!content || !mounted) return "";
     try {
       return generateHTML(content as never, [StarterKit, Link, Image]);
     } catch {
       return "";
     }
-  }, [content]);
+  }, [content, mounted]);
 
   if (!html) return null;
   return (

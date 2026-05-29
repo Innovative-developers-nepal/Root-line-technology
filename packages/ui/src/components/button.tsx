@@ -13,6 +13,7 @@ const buttonStyles = cva(
         outline:     "border border-border bg-background hover:bg-muted hover:border-foreground/20",
         ghost:       "hover:bg-muted hover:text-foreground",
         accent:      "bg-accent text-accent-foreground hover:bg-accent/90 shadow-sm hover:shadow",
+        dark:        "bg-foreground text-background hover:bg-foreground/90 shadow-sm hover:shadow",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm",
         link:        "text-primary underline-offset-4 hover:underline",
         gradient:    "bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-sm hover:shadow-md hover:from-primary hover:to-primary",

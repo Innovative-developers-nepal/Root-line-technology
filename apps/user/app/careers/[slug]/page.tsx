@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Section, SectionHeading } from "@rootline/ui/blocks";
 import { Container, Badge, Card } from "@rootline/ui/components";
+import { RichTextRenderer } from "@rootline/ui/editor";
 import {
   buildMetadata,
   breadcrumbJsonLd,
@@ -51,6 +52,10 @@ export default async function JobDetailPage({ params }: Props) {
               <span className="text-sm text-muted-foreground">· {job.salaryRange}</span>
             )}
           </div>
+
+          <article className="prose prose-neutral dark:prose-invert mx-auto mt-10">
+            <RichTextRenderer content={job.body as Record<string, unknown>} />
+          </article>
 
           <Card className="mt-12 p-8">
             <h2 className="font-display text-2xl">Apply</h2>

@@ -14,6 +14,8 @@ import { fetchBlog, fetchBlogList, type BlogPost } from "@rootline/api-client";
 import { formatDate } from "@rootline/utils";
 import { ReadingProgress } from "@/components/reading-progress";
 import { ShareButtons } from "@/components/share-buttons";
+import { SharePopover } from "@/components/share-popover";
+import { CommentSection } from "@/components/comment-section";
 
 export const dynamic = "force-dynamic";
 
@@ -90,12 +92,16 @@ export default async function BlogDetailPage({ params }: Props) {
 
         {/* Article header */}
         <Container size="md" className="py-12">
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-4">
             <Badge variant="secondary">{post.category}</Badge>
-            <span className="text-sm text-muted-foreground">
-              {post.publishedAt ? formatDate(post.publishedAt, "long") : ""}
-              {post.readTime ? ` · ${post.readTime} min read` : ""}
-            </span>
+            {post.publishedAt && (
+              <span className="text-sm text-muted-foreground">
+                {formatDate(post.publishedAt, "long")}
+              </span>
+            )}
+            {post.readTime && (
+              <span className="text-sm text-muted-foreground">{post.readTime}</span>
+            )}
           </div>
 
           <h1 className="mt-6 font-display text-4xl leading-tight tracking-tight md:text-5xl lg:text-6xl">
@@ -106,20 +112,23 @@ export default async function BlogDetailPage({ params }: Props) {
             {post.excerpt}
           </p>
 
-          {/* Author */}
-          <div className="mt-6 flex items-center gap-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-              {post.author.charAt(0)}
+          {/* Author + Share */}
+          <div className="mt-6 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
+                {post.author.charAt(0)}
+              </div>
+              <div>
+                <p className="text-sm font-medium">{post.author}</p>
+                <p className="flex items-center gap-3 text-xs text-muted-foreground">
+                  <span>
+                    {post.publishedAt ? formatDate(post.publishedAt, "long") : "Draft"}
+                  </span>
+                  {post.readTime && <span>{post.readTime}</span>}
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-medium">{post.author}</p>
-              <p className="text-xs text-muted-foreground">
-                {post.publishedAt
-                  ? formatDate(post.publishedAt, "long")
-                  : "Draft"}
-                {post.readTime ? ` · ${post.readTime} min read` : ""}
-              </p>
-            </div>
+            <SharePopover url={url} title={post.title} slug={post.slug} />
           </div>
         </Container>
 
@@ -146,7 +155,12 @@ export default async function BlogDetailPage({ params }: Props) {
         {/* Share */}
         <Container size="md" className="pb-12">
           <Separator className="mb-6" />
-          <ShareButtons url={url} title={post.title} />
+          <ShareButtons url={url} title={post.title} slug={post.slug} initialShareCount={post.shareCount} />
+        </Container>
+
+        {/* Comments */}
+        <Container size="md">
+          <CommentSection postSlug={post.slug} />
         </Container>
 
         {/* Author bio */}

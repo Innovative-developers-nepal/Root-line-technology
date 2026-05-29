@@ -17,6 +17,7 @@ const BLOG_SELECT = {
     readTime:    true,
     published:   true,
     publishedAt: true,
+    shareCount:  true,
     createdAt:   true,
     updatedAt:   true,
 };
@@ -121,4 +122,17 @@ export async function deleteBlogPost(id: string) {
     const post = await prisma.blogPost.findUnique({ where: { id } });
     if (!post) throw new CustomError(404, "Blog post not found", "NOT_FOUND");
     await prisma.blogPost.delete({ where: { id } });
+}
+
+export async function incrementShareCount(slug: string) {
+    const post = await prisma.blogPost.findUnique({ where: { slug } });
+    if (!post) throw new CustomError(404, "Blog post not found", "NOT_FOUND");
+
+    const updated = await prisma.blogPost.update({
+        where: { slug },
+        data: { shareCount: { increment: 1 } },
+        select: { shareCount: true },
+    });
+
+    return updated;
 }

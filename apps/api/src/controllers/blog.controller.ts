@@ -48,3 +48,8 @@ export const adminDeleteBlogPost = asyncHandler(async (req: AuthRequest, res) =>
     await blogService.deleteBlogPost(req.params.id as string);
     sendSuccess(res, httpStatus.OK, null);
 });
+
+export const sharePost = asyncHandler(async (req, res) => {
+    const result = await blogService.incrementShareCount(req.params.slug as string);
+    sendSuccess(res, httpStatus.OK, result);
+});

@@ -27,6 +27,12 @@ router.get(
     blogController.getBlogPostBySlug
 );
 
+router.post(
+    "/:slug/share",
+    validate(slugParamContract),
+    blogController.sharePost
+);
+
 // Admin routes
 router.post(
     "/admin",

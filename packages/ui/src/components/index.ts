@@ -9,3 +9,4 @@ export * from "./container";
 export * from "./skeleton";
 export * as Dialog from "@radix-ui/react-dialog";
 export * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+export * as Popover from "@radix-ui/react-popover";

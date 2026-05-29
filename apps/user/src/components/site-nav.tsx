@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { Button, Dialog, DropdownMenu } from "@rootline/ui/components";
+import { Menu, X, ChevronDown, Sparkles } from "lucide-react";
+import { Button, Container, Dialog, DropdownMenu } from "@rootline/ui/components";
 import { cn } from "@rootline/ui/lib/cn";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -17,8 +17,9 @@ interface NavLink {
 
 const LINKS: NavLink[] = [
   { label: "About", href: "/about" },
+  { label: "Careers", href: "/careers" },
   {
-    label: "Services",
+    label: "Solutions",
     href: "/services",
     children: [
       { label: "Overview", href: "/services" },
@@ -27,20 +28,36 @@ const LINKS: NavLink[] = [
       { label: "Web platforms", href: "/services/web-apps" },
     ],
   },
-  { label: "Careers", href: "/careers" },
-  { label: "Blog", href: "/blog" },
+  {
+    label: "Research",
+    href: "/blog",
+    children: [{ label: "Blog", href: "/blog" }],
+  },
 ];
 
 function BrandMark() {
   return (
-    <Link href="/" className="group inline-flex shrink-0 items-center gap-2.5">
-      <img
-        src="/logo.png"
-        alt="Rootline Technology"
-        width={140}
-        height={36}
-        className="h-8 w-auto"
-      />
+    <Link
+      href="/"
+      aria-label="Rootline Technology — home"
+      className="group inline-flex shrink-0 items-center gap-2.5"
+    >
+      <span className="grid size-8 place-items-center rounded-md border border-primary/25 bg-primary/5 text-primary transition-colors duration-200 group-hover:border-primary/50 group-hover:bg-primary/10">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden className="size-[18px]">
+          <path
+            d="M12 5 6 18M12 5l6 9"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+          />
+          <circle cx="12" cy="5" r="2.4" fill="currentColor" />
+          <circle cx="6" cy="18" r="1.9" fill="currentColor" />
+          <circle cx="18" cy="14" r="1.9" fill="currentColor" />
+        </svg>
+      </span>
+      <span className="font-display text-xl leading-none tracking-[-0.02em] text-foreground">
+        Rootline
+      </span>
     </Link>
   );
 }
@@ -64,23 +81,26 @@ export function SiteNav() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
+        "sticky top-0 z-50 w-full border-b transition-all duration-300",
+        "hover:border-border/5 hover:bg-background/8 hover:backdrop-blur-lg hover:backdrop-saturate-150",
         scrolled
-          ? "border-b border-border/60 bg-background/70 backdrop-blur-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]"
-          : "border-b border-transparent bg-background/30 backdrop-blur-sm",
+          ? "backdrop-blur-lg backdrop-saturate-150 shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]"
+          : "border-transparent bg-transparent",
       )}
     >
-      <div className="mx-auto w-full max-w-6xl px-6 lg:px-8">
+      <Container>
         <div
           className={cn(
             "flex items-center justify-between transition-all duration-300",
-            scrolled ? "h-14" : "h-16",
+          "h-21",
           )}
         >
-          <BrandMark />
+          <div className="flex flex-1 items-center">
+            <BrandMark />
+          </div>
 
-          {/* Desktop nav */}
-          <nav className="hidden items-center gap-0.5 md:flex">
+          {/* Desktop nav — centered */}
+          <nav className="hidden items-center gap-1 md:flex">
             {LINKS.map((link) => {
               const isActive =
                 pathname === link.href ||
@@ -105,7 +125,7 @@ export function SiteNav() {
 
                     <DropdownMenu.Portal>
                       <DropdownMenu.Content
-                        className="z-50 min-w-[180px] rounded-xl border border-border/60 bg-background/80 p-1.5 shadow-lg backdrop-blur-xl"
+                        className="z-50 min-w-[180px] origin-[var(--radix-dropdown-menu-content-transform-origin)] rounded-xl border border-border/60 bg-background/80 p-1.5 shadow-lg backdrop-blur-xl data-[state=open]:[animation:rl-dropdown-in_180ms_cubic-bezier(0.22,1,0.36,1)] data-[state=closed]:[animation:rl-dropdown-out_140ms_ease-in]"
                         sideOffset={8}
                       >
                         {link.children.map((child) => (
@@ -154,16 +174,24 @@ export function SiteNav() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-1 items-center justify-end gap-2">
             <ThemeToggle />
-            <Button asChild size="sm" className="hidden rounded-full md:inline-flex">
-              <Link href="/contact">Contact</Link>
+            <Button
+              asChild
+              size="sm"
+              variant="dark"
+              className="hidden rounded-full pl-3 pr-4 md:inline-flex"
+            >
+              <Link href="/contact">
+                <Sparkles className="h-3.5 w-3.5 text-primary" aria-hidden />
+                Contact
+              </Link>
             </Button>
 
             {/* Mobile hamburger */}
             <Dialog.Root open={mobileOpen} onOpenChange={setMobileOpen}>
               <Dialog.Trigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full md:hidden">
+                <Button variant="ghost" size="icon" className="md:hidden">
                   {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
                 </Button>
               </Dialog.Trigger>
@@ -223,7 +251,7 @@ export function SiteNav() {
                       );
                     })}
                     <div className="mt-3 border-t border-border/50 pt-3">
-                      <Button asChild size="sm" className="w-full rounded-full">
+                      <Button asChild size="sm" className="w-full">
                         <Link href="/contact" onClick={() => setMobileOpen(false)}>
                           Contact
                         </Link>
@@ -235,7 +263,7 @@ export function SiteNav() {
             </Dialog.Root>
           </div>
         </div>
-      </div>
+      </Container>
     </header>
   );
 }
