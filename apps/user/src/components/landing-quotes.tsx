@@ -75,24 +75,6 @@ export function LandingQuotes() {
         });
       });
 
-      const eyebrow = el.querySelector<HTMLElement>("[data-eyebrow]");
-      if (eyebrow) {
-        const t = gsap.fromTo(
-          eyebrow,
-          { opacity: 0, y: 16 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power3.out",
-            scrollTrigger: { trigger: eyebrow, start: "top 85%" },
-          },
-        );
-        cleanups.push(() => {
-          t.scrollTrigger?.kill();
-          t.kill();
-        });
-      }
     })();
 
     return () => cleanups.forEach((c) => c());
@@ -105,17 +87,7 @@ export function LandingQuotes() {
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(0,0,0,0.04),transparent_70%)] dark:bg-[radial-gradient(60%_50%_at_50%_0%,rgba(255,255,255,0.05),transparent_70%)]"
       />
       <Container>
-        <div ref={containerRef} className="mx-auto max-w-4xl">
-          <div data-eyebrow className="mb-24 flex flex-col items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-3 py-1 text-[11px] font-medium tracking-wide text-muted-foreground backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden />
-              How we build
-            </span>
-            <p className="max-w-md text-center text-sm text-muted-foreground">
-              Four principles that shape every engagement.
-            </p>
-          </div>
-
+      <div ref={containerRef} className="mx-auto max-w-4xl">
           <div className="flex flex-col gap-28 md:gap-36">
             {QUOTES.map((q) => (
               <figure

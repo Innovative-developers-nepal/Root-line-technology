@@ -106,17 +106,13 @@ export function LandingLogos() {
   const items = [...LOGOS, ...LOGOS];
 
   return (
-    <section className="relative py-16 md:py-20 flex w-full flex-col items-center justify-center overflow-hidden border-t border-border/50 bg-muted/20">
+    <section className="relative py-16 md:py-20 flex w-full flex-col items-center justify-center overflow-hidden bg-background">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_50%,rgba(0,0,0,0.04),transparent_70%)] dark:bg-[radial-gradient(60%_50%_at_50%_50%,rgba(255,255,255,0.05),transparent_70%)]"
       />
       <Container className="flex w-full flex-col items-center">
         <div className="mb-14 flex flex-col items-center gap-4 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-3 py-1 text-[11px] font-medium tracking-wide text-muted-foreground backdrop-blur-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden />
-            Track record
-          </span>
           <h2 className="max-w-3xl font-display text-4xl leading-[1.05] tracking-tight md:text-6xl">
             Developers from these orgs
             <br />

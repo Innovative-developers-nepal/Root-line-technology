@@ -8,3 +8,8 @@ export * from "./grid-background";
 export * from "./aurora";
 export * from "./spotlight-card";
 export * from "./vein-card";
+export * from "./stem-decorator";
+export * from "./wavy-divider";
+export * from "./noise-overlay";
+export * from "./digital-network";
+export * from "./root-system";
