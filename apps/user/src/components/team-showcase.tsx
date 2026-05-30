@@ -1,13 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Github, Linkedin, Globe, Twitter } from "lucide-react";
 import { cn } from "@rootline/ui/lib/cn";
 
 export type ShowcaseMember = {
   name: string;
   role: string;
+  position?: string;
   bio: string;
   image?: string;
+  links?: {
+    github?: string;
+    linkedin?: string;
+    website?: string;
+    twitter?: string;
+  };
 };
 
 function initials(name: string) {
@@ -98,13 +106,51 @@ function getPhotoSlots() {
 
 const PHOTO_SLOTS = getPhotoSlots();
 
+const ROTATE_INTERVAL_MS = 3500;
+
+const RESUME_AFTER_INTERACTION_MS = 8000;
+
 export function TeamShowcase({ members }: { members: ShowcaseMember[] }) {
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [interactedAt, setInteractedAt] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (paused || members.length <= 1) return;
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+
+    if (interactedAt) {
+      const delay = Math.max(
+        RESUME_AFTER_INTERACTION_MS - (Date.now() - interactedAt),
+        0,
+      );
+      const timeout = window.setTimeout(() => setInteractedAt(null), delay);
+      return () => window.clearTimeout(timeout);
+    }
+
+    const id = window.setInterval(() => {
+      setActive((i) => (i + 1) % members.length);
+    }, ROTATE_INTERVAL_MS);
+    return () => window.clearInterval(id);
+  }, [paused, members.length, interactedAt]);
+
+  const selectMember = (i: number) => {
+    setActive(i);
+    setInteractedAt(Date.now());
+  };
+
   const activeMember = members[active] ?? members[0];
   if (!activeMember) return null;
 
   return (
     <div
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
       className="relative z-40 grid w-full"
       style={{
         display: "grid",
@@ -159,31 +205,90 @@ export function TeamShowcase({ members }: { members: ShowcaseMember[] }) {
         className="flex flex-col rounded-2xl border border-border/60 bg-card p-4 overflow-hidden"
         style={{ gridColumn: "5 / 7", gridRow: "2 / 4" }}
       >
-        <span className="inline-flex w-fit rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-primary">
-          Super Builder
-        </span>
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="inline-flex w-fit rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-primary">
+            {activeMember.role}
+          </span>
+          {activeMember.position && (
+            <span className="inline-flex w-fit rounded-full border border-border bg-muted px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-foreground/80">
+              {activeMember.position}
+            </span>
+          )}
+        </div>
         <h3 className="mt-2 font-display text-lg font-bold leading-tight tracking-tight text-foreground line-clamp-1">
           {activeMember.name}
         </h3>
-        <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-[7]">
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-6">
           {activeMember.bio}
         </p>
-        {/* dot nav */}
-        <div className="mt-auto flex flex-wrap gap-1 pt-2">
-          {members.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setActive(i)}
-              aria-label={`View ${members[i]?.name}`}
-              className={cn(
-                "h-1.5 w-1.5 rounded-full transition-all duration-200",
-                i === active
-                  ? "scale-150 bg-primary"
-                  : "bg-border hover:bg-primary/40",
+
+        {/* footer: dots + links */}
+        <div className="mt-auto flex items-center justify-between gap-2 pt-2">
+          <div className="flex flex-wrap items-center gap-1">
+            {members.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => selectMember(i)}
+                aria-label={`View ${members[i]?.name}`}
+                className={cn(
+                  "h-1.5 w-1.5 rounded-full transition-all duration-200",
+                  i === active
+                    ? "scale-150 bg-primary"
+                    : "bg-border hover:bg-primary/40",
+                )}
+              />
+            ))}
+          </div>
+
+          {activeMember.links && (
+            <div className="flex items-center gap-1">
+              {activeMember.links.github && (
+                <a
+                  href={activeMember.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${activeMember.name} on GitHub`}
+                  className="rounded-md p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  <Github className="size-3.5" />
+                </a>
               )}
-            />
-          ))}
+              {activeMember.links.linkedin && (
+                <a
+                  href={activeMember.links.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${activeMember.name} on LinkedIn`}
+                  className="rounded-md p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  <Linkedin className="size-3.5" />
+                </a>
+              )}
+              {activeMember.links.twitter && (
+                <a
+                  href={activeMember.links.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${activeMember.name} on Twitter`}
+                  className="rounded-md p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  <Twitter className="size-3.5" />
+                </a>
+              )}
+              {activeMember.links.website && (
+                <a
+                  href={activeMember.links.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${activeMember.name} website`}
+                  className="rounded-md p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  <Globe className="size-3.5" />
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -197,7 +302,7 @@ export function TeamShowcase({ members }: { members: ShowcaseMember[] }) {
             <button
               key={m.name}
               type="button"
-              onClick={() => setActive(i)}
+              onClick={() => selectMember(i)}
               aria-pressed={i === active}
               style={style}
               className={cn(

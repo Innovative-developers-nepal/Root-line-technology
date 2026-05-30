@@ -14,11 +14,11 @@ export const metadata: Metadata = buildMetadata({
 const TEAM_PLACEHOLDER = [
   {
     name: "Prajwal Bhattarai",
-    role: "Founder",
+    role: "CEO",
     image: "/team/sg.jpeg",
     icon: "code" as const,
-    bio: "Full-stack engineer. Builds the platforms, sets the bar for code review, owns delivery end-to-end.",
-    focus: ["Next.js", "Postgres", "Systems design"],
+    bio: "Sets product strategy and owns client outcomes. Defines the engineering standards Rootline ships against and steers the company's long-term direction.",
+    focus: ["Strategy", "Product", "Systems design"],
     links: {
       github: "https://github.com/",
       linkedin: "https://www.linkedin.com/",
@@ -29,8 +29,8 @@ const TEAM_PLACEHOLDER = [
     role: "CTO",
     image: "/team/pb.jpeg",
     icon: "cpu" as const,
-    bio: "Architects scalable infrastructure and leads engineering execution across products.",
-    focus: ["AWS", "Kubernetes", "DevOps"],
+    bio: "Leads engineering across Rootline's products and shapes how systems are designed, secured, and scaled. Open-source contributor to Microsoft and LinkedIn, with a focus on cybersecurity and production-grade infrastructure.",
+    focus: ["Cybersecurity", "AWS", "Kubernetes"],
     links: {
       github: "https://github.com/",
       linkedin: "https://www.linkedin.com/",
@@ -38,44 +38,47 @@ const TEAM_PLACEHOLDER = [
   },
   {
     name: "Nabin Thapa",
-    role: "Lead Backend Engineer",
+    role: "Founder",
+    position: "Lead Backend Engineer",
     image: "/team/nt.jpeg",
     icon: "database" as const,
-    bio: "Designs APIs, microservices, queues, and distributed backend systems.",
-    focus: ["Node.js", "Redis", "Kafka"],
+    bio: "Co-founder leading backend engineering at Rootline. Designs the APIs, services, and data pipelines that keep our products reliable, observable, and ready to scale.",
+    focus: ["Node.js", "PostgreSQL", "Distributed systems"],
     links: {
       github: "https://github.com/",
     },
   },
   {
     name: "Poshan Bista",
-    role: "Mobile + Web",
+    role: "Founder",
+    position: "Project Manager",
     image: "/team/pb.png",
     icon: "smartphone" as const,
-    bio: "Ships Flutter and Next.js features daily. Owns the mobile codebase and the public release pipeline.",
-    focus: ["Flutter", "Riverpod", "CI/CD"],
+    bio: "Co-founder running delivery at Rootline. Owns scope, timelines, and stakeholder communication so engineering ships on time and clients always know where things stand.",
+    focus: ["Delivery", "Planning", "Client success"],
     links: {
       github: "https://github.com/",
     },
   },
   {
     name: "Ashim Thapa Magar",
-    role: "Frontend Engineer",
+    role: "Founder",
+    position: "Product Engineer",
     image: "/team/at.png",
     icon: "monitor" as const,
-    bio: "Builds performant interfaces and scalable design systems for modern web apps.",
-    focus: ["React", "Next.js", "Tailwind"],
+    bio: "Founder and Product Engineer focused on building scalable products from idea to production, with expertise in full-stack development, system architecture, cloud infrastructure, and AI-driven solutions",
+    focus: ["End-to-end delivery", "Architecture", "Product engineering"],
     links: {
       github: "https://github.com/",
     },
   },
   {
     name: "Nisha Lamichane",
-    role: "Frontend Engineer",
+    role: "Full Stack Developer",
     image: "/team/nl.jpeg",
     icon: "monitor" as const,
-    bio: "Builds performant interfaces and scalable design systems for modern web apps.",
-    focus: ["React", "Next.js", "Tailwind"],
+    bio: "Ships end-to-end features across frontend and backend. Previously at Cloco, bringing production experience from a larger engineering organization into Rootline's product work.",
+    focus: ["React", "Next.js", "Node.js"],
     links: {
       github: "https://github.com/",
     },
@@ -209,7 +212,9 @@ export default function AboutPage() {
                 name: m.name,
                 image: m.image,
                 role: m.role,
+                position: "position" in m ? (m.position as string) : undefined,
                 bio: m.bio,
+                links: m.links,
               }))}
             />
           </div>
