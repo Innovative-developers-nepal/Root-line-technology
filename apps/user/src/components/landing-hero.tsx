@@ -3,16 +3,20 @@ import { motion } from "framer-motion";
 import { Container, Button } from "@rootline/ui/components";
 import { Spotlight, SystemGraph } from "@rootline/ui/blocks";
 import { usePrefersReducedMotion } from "@rootline/hooks";
+import { useIntroReady } from "@/components/intro-splash";
 
 export function LandingHero() {
   const reduced = usePrefersReducedMotion();
+  const ready = useIntroReady();
 
   const rise = (delay: number) =>
     reduced
       ? { initial: false as const }
       : {
         initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
+        // Hold at the initial state until the intro splash is done, so the
+        // entrance plays AFTER the splash fades — not while it's covering us.
+        animate: ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
         transition: { duration: 1, delay, ease: [0.22, 1, 0.36, 1] as const },
       };
 

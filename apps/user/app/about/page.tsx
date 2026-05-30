@@ -15,7 +15,7 @@ const TEAM_PLACEHOLDER = [
   {
     name: "Prajwal Bhattarai",
     role: "Founder",
-    image: "/team/pb.jpeg",
+    image: "/team/sg.jpeg",
     icon: "code" as const,
     bio: "Full-stack engineer. Builds the platforms, sets the bar for code review, owns delivery end-to-end.",
     focus: ["Next.js", "Postgres", "Systems design"],
@@ -27,7 +27,7 @@ const TEAM_PLACEHOLDER = [
   {
     name: "Sajan Ghimire",
     role: "CTO",
-    image: "/team/sg.jpeg",
+    image: "/team/pb.jpeg",
     icon: "cpu" as const,
     bio: "Architects scalable infrastructure and leads engineering execution across products.",
     focus: ["AWS", "Kubernetes", "DevOps"],
@@ -48,6 +48,17 @@ const TEAM_PLACEHOLDER = [
     },
   },
   {
+    name: "Poshan Bista",
+    role: "Mobile + Web",
+    image: "/team/pb.png",
+    icon: "smartphone" as const,
+    bio: "Ships Flutter and Next.js features daily. Owns the mobile codebase and the public release pipeline.",
+    focus: ["Flutter", "Riverpod", "CI/CD"],
+    links: {
+      github: "https://github.com/",
+    },
+  },
+  {
     name: "Ashim Thapa Magar",
     role: "Frontend Engineer",
     image: "/team/at.png",
@@ -57,18 +68,7 @@ const TEAM_PLACEHOLDER = [
     links: {
       github: "https://github.com/",
     },
-  },
-  {
-    name: "Lead Developer",
-    role: "Mobile + Web",
-    image: "/team/lead-dev.jpg",
-    icon: "smartphone" as const,
-    bio: "Ships Flutter and Next.js features daily. Owns the mobile codebase and the public release pipeline.",
-    focus: ["Flutter", "Riverpod", "CI/CD"],
-    links: {
-      github: "https://github.com/",
-    },
-  },
+  }
 ];
 
 const PRINCIPLES: { title: string; body: string }[] = [

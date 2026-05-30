@@ -9,6 +9,7 @@ import { Providers } from "@/components/providers";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { CookieConsent } from "@/components/cookie-consent";
+import { IntroSplash } from "@/components/intro-splash";
 import { GrainOverlay } from "@rootline/ui/blocks";
 import { PageViewTracker } from "@rootline/analytics";
 
@@ -28,6 +29,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body>
+        {/* Runs before body paint: tag <html> so a CSS pre-overlay hides
+            content until IntroSplash takes over (prevents hero flash). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(!sessionStorage.getItem('rootline:intro-shown')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-pending');}catch(e){}",
+          }}
+        />
+        <IntroSplash />
         <Providers>
           <SiteNav />
           {children}

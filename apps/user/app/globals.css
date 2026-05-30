@@ -14,3 +14,18 @@
   from { opacity: 1; transform: translateY(0) scale(1); }
   to { opacity: 0; transform: translateY(-6px) scale(0.97); }
 }
+
+/* Pre-overlay: covers the page before IntroSplash mounts so the hero
+   doesn't flash for a frame on first visit. The class is added by an
+   inline script in <body> and removed when the splash finishes. */
+html.intro-pending::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background-color: var(--color-background);
+  pointer-events: none;
+}
+html.intro-pending body {
+  overflow: hidden;
+}
