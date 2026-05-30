@@ -68,6 +68,17 @@ const TEAM_PLACEHOLDER = [
     links: {
       github: "https://github.com/",
     },
+  },
+  {
+    name: "Nisha Lamichane",
+    role: "Frontend Engineer",
+    image: "/team/nl.jpeg",
+    icon: "monitor" as const,
+    bio: "Builds performant interfaces and scalable design systems for modern web apps.",
+    focus: ["React", "Next.js", "Tailwind"],
+    links: {
+      github: "https://github.com/",
+    },
   }
 ];
 
