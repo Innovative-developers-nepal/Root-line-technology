@@ -105,7 +105,7 @@ export function TeamShowcase({ members }: { members: ShowcaseMember[] }) {
 
   return (
     <div
-      className="grid w-full"
+      className="relative z-40 grid w-full"
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(7, 1fr)",
