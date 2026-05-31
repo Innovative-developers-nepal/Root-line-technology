@@ -39,7 +39,7 @@ export default function JobsAdminPage() {
         title="Jobs"
         description="Career postings."
         actions={
-          <Button asChild>
+          <Button asChild className="p-2 px-4">
             <Link href="/jobs/new">New job</Link>
           </Button>
         }

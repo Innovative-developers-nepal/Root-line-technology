@@ -38,7 +38,7 @@ export default function BlogAdminPage() {
         title="Blog"
         description="Articles + tutorials. Tiptap editor."
         actions={
-          <Button asChild>
+          <Button asChild className="p-2 px-4">
             <Link href="/blog/new">New post</Link>
           </Button>
         }

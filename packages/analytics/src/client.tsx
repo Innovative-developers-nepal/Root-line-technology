@@ -13,11 +13,16 @@ export function PostHogProvider({ apiKey, apiHost, children }: PostHogProviderPr
     if (!apiKey) return;
     if (typeof window === "undefined") return;
     if (posthog.__loaded) return;
-    posthog.init(apiKey, {
-      api_host: apiHost ?? "https://app.posthog.com",
-      capture_pageview: false,
-      person_profiles: "identified_only",
-    });
+
+    try {
+      posthog.init(apiKey, {
+        api_host: apiHost ?? "https://app.posthog.com",
+        capture_pageview: false,
+        person_profiles: "identified_only",
+      });
+    } catch {
+      // Prevent analytics initialization failures from blocking the page.
+    }
   }, [apiKey, apiHost]);
 
   return <>{children}</>;
