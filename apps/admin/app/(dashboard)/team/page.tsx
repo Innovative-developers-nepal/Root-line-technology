@@ -36,7 +36,7 @@ export default function TeamAdminPage() {
         title="Team"
         description="People rendered on /about."
         actions={
-          <Button asChild>
+          <Button asChild className="p-2 px-4">
             <Link href="/team/new">New member</Link>
           </Button>
         }

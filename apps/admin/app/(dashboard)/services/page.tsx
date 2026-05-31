@@ -38,7 +38,7 @@ export default function ServicesAdminPage() {
         title="Services"
         description="Marketing-site service offerings."
         actions={
-          <Button asChild>
+          <Button asChild className="p-2 px-4">
             <Link href="/services/new">New service</Link>
           </Button>
         }

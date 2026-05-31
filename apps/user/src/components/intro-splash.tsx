@@ -48,33 +48,52 @@ export function IntroSplash() {
   const [data, setData] = useState<unknown>(null);
   const reduced = usePrefersReducedMotion();
 
+  const releaseIntro = () => {
+    document.documentElement.classList.remove("intro-pending");
+    window.dispatchEvent(new Event(READY_EVENT));
+    setPhase("done");
+  };
+
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || process.env.NODE_ENV === "development") {
+      releaseIntro();
+      return;
+    }
+
     try {
-      if (sessionStorage.getItem(SESSION_KEY)) return;
+      if (sessionStorage.getItem(SESSION_KEY)) {
+        releaseIntro();
+        return;
+      }
     } catch {
       /* ignore */
     }
 
     let cancelled = false;
     setPhase("loading");
-    fetch("/animations/1.json")
+
+    const fallbackTimer = window.setTimeout(() => {
+      if (!cancelled) {
+        releaseIntro();
+      }
+    }, 3500);
+
+    fetch("/animations/1.json", { cache: "no-store" })
       .then((r) => r.json())
       .then((d) => {
         if (cancelled) return;
+        clearTimeout(fallbackTimer);
         setData(d);
         setPhase("playing");
       })
       .catch(() => {
-        // Fetch failed — release the pre-overlay and signal ready so the
-        // page isn't trapped behind it.
-        document.documentElement.classList.remove("intro-pending");
-        window.dispatchEvent(new Event(READY_EVENT));
-        setPhase("done");
+        clearTimeout(fallbackTimer);
+        releaseIntro();
       });
 
     return () => {
       cancelled = true;
+      clearTimeout(fallbackTimer);
     };
   }, [reduced]);
 
@@ -107,7 +126,7 @@ export function IntroSplash() {
     <div
       aria-hidden
       className={cn(
-        "fixed inset-0 z-[100] flex items-center justify-center bg-background transition-opacity duration-500",
+        "fixed inset-0 z-100 flex items-center justify-center bg-background transition-opacity duration-500",
         phase === "fading" ? "pointer-events-none opacity-0" : "opacity-100",
       )}
     >

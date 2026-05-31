@@ -43,7 +43,7 @@ function BrandMark() {
       className="group inline-flex shrink-0 items-center gap-2.5"
     >
       <span className="grid size-8 place-items-center rounded-md border border-primary/25 bg-primary/5 text-primary transition-colors duration-200 group-hover:border-primary/50 group-hover:bg-primary/10">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden className="size-[18px]">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden className="size-18px">
           <path
             d="M12 5 6 18M12 5l6 9"
             stroke="currentColor"
@@ -125,7 +125,7 @@ export function SiteNav() {
 
                     <DropdownMenu.Portal>
                       <DropdownMenu.Content
-                        className="z-50 min-w-[180px] origin-[var(--radix-dropdown-menu-content-transform-origin)] rounded-xl border border-border/60 bg-background/80 p-1.5 shadow-lg backdrop-blur-xl data-[state=open]:[animation:rl-dropdown-in_180ms_cubic-bezier(0.22,1,0.36,1)] data-[state=closed]:[animation:rl-dropdown-out_140ms_ease-in]"
+                        className="z-50 min-w-180px origin-(--radix-dropdown-menu-content-transform-origin) rounded-xl border border-border/60 bg-background/80 p-1.5 shadow-lg backdrop-blur-xl `data-[state=open]:animate-[rl-dropdown-in_180ms_cubic-bezier(0.22,1,0.36,1)]"
                         sideOffset={8}
                       >
                         {link.children.map((child) => (

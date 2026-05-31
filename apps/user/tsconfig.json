@@ -1,7 +1,9 @@
 {
   "extends": "@rootline/tsconfig/nextjs.json",
   "compilerOptions": {
-    "baseUrl": ".",
+    // "baseUrl": ".",
+    "moduleResolution": "bundler",
+    "types": ["node", "next", "next/types/global"],
     "paths": {
       "@/*": [
         "./src/*"
@@ -13,7 +15,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next-env.d.ts",
-    ".next-build/types/**/*.ts"
+    ".next-build/types/**/*.ts",
+    "./app/golobals.css"
   ],
   "exclude": [
     "node_modules",
