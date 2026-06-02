@@ -9,8 +9,7 @@ import {
   SITE,
 } from "@rootline/seo";
 import { fetchServiceList, type Service } from "@rootline/api-client";
-import { ServiceSection } from "@/components/service-section";
-import { ServiceNav } from "@/components/service-nav";
+import { ServiceCard } from "@/components/service-card";
 
 export const metadata: Metadata = buildMetadata({
   title: "Services",
@@ -44,7 +43,8 @@ const FALLBACK_SERVICES: Service[] = [
 
 async function getServices(): Promise<Service[]> {
   try {
-    return await fetchServiceList();
+    const services = await fetchServiceList();
+    return services.length > 0 ? services : FALLBACK_SERVICES;
   } catch {
     return FALLBACK_SERVICES;
   }
@@ -63,20 +63,18 @@ export default async function ServicesPage() {
             description="Three practices. Each runs deep."
             size="lg"
           />
-          <ServiceNav items={services.map(({ slug, title }) => ({ slug, title }))} />
         </Container>
       </Section>
 
-      {services.map((svc, i) => (
-        <ServiceSection
-          key={svc.slug}
-          slug={svc.slug}
-          title={svc.title}
-          summary={svc.summary}
-          body={svc.body as string}
-          tone={i % 2 === 0 ? "muted" : "default"}
-        />
-      ))}
+      <Section className="pt-0">
+        <Container>
+          <div className="grid gap-6 md:grid-cols-3">
+            {services.map((svc, i) => (
+              <ServiceCard key={svc.slug} service={svc} index={i} />
+            ))}
+          </div>
+        </Container>
+      </Section>
 
       <script
         type="application/ld+json"
