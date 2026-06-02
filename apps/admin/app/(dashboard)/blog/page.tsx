@@ -2,13 +2,13 @@
 import Link from "next/link";
 import { Button } from "@rootline/ui/components";
 import { DataTable, EmptyState, type ColumnDef } from "@rootline/ui/data";
-import { useBlogList, useDeleteBlog, type BlogPost } from "@rootline/api-client";
+import { useAdminBlogList, useDeleteBlog, type BlogPost } from "@rootline/api-client";
 import { AdminPageHeader } from "@/components/page-header";
 import { RowActions } from "@/components/row-actions";
 import { formatDate } from "@rootline/utils";
 
 export default function BlogAdminPage() {
-  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useBlogList();
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useAdminBlogList();
   const del = useDeleteBlog();
   const rows = data?.pages.flatMap((p) => p.items) ?? [];
 

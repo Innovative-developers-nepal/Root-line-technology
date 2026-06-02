@@ -15,10 +15,10 @@ export interface ColumnDef<T> {
 const tableStyles = cva("w-full", {
   variants: {
     variant: {
-      dense:       "text-sm [&_th]:py-2 [&_td]:py-2",
+      dense: "text-sm [&_th]:py-2 [&_td]:py-2",
       comfortable: "text-sm [&_th]:py-3.5 [&_td]:py-3.5",
-      bordered:    "text-sm [&_th]:py-3 [&_td]:py-3 border border-border rounded-md",
-      cards:       "block",
+      bordered: "text-sm [&_th]:py-3 [&_td]:py-3 border border-border rounded-md",
+      cards: "block",
     },
   },
   defaultVariants: { variant: "comfortable" },
@@ -27,7 +27,7 @@ const tableStyles = cva("w-full", {
 const rowStyles = cva("border-b border-border transition-colors", {
   variants: {
     interactive: {
-      true:  "hover:bg-muted/50 cursor-pointer",
+      true: "hover:bg-muted/50 cursor-pointer",
       false: "",
     },
   },
@@ -117,7 +117,7 @@ export function DataTable<T>({
                 key={col.key}
                 style={col.width ? { width: col.width } : undefined}
                 className={cn(
-                  "px-4 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground",
+                  "px-4 text-xs text-start font-medium uppercase tracking-wider text-muted-foreground",
                   col.align === "right" && "text-right",
                   col.align === "center" && "text-center",
                 )}

@@ -21,6 +21,8 @@ export type BlogPost = {
   updatedAt: string;
 };
 
+// ── Public fetchers ──────────────────────────────────────────
+
 export async function fetchBlogList(filters: ListFilters = {}): Promise<CursorPage<BlogPost>> {
   const { data, meta } = await api.requestWithMeta<BlogPost[]>("/api/v1/blog", { query: { ...filters } });
   return { items: data ?? [], nextCursor: meta?.pagination?.nextCursor ?? null };
@@ -41,6 +43,19 @@ export async function listAllBlogSlugs(): Promise<{ slug: string; updatedAt: str
   return out;
 }
 
+// ── Admin fetchers ───────────────────────────────────────────
+
+export async function fetchBlogPostById(id: string): Promise<BlogPost> {
+  return api.request<BlogPost>(`/api/v1/blog/admin/${id}`);
+}
+
+export async function fetchAdminBlogList(filters: ListFilters = {}): Promise<CursorPage<BlogPost>> {
+  const { data, meta } = await api.requestWithMeta<BlogPost[]>("/api/v1/blog/admin/all", { query: { ...filters } });
+  return { items: data ?? [], nextCursor: meta?.pagination?.nextCursor ?? null };
+}
+
+// ── Public hooks ─────────────────────────────────────────────
+
 export function useBlogList(filters: ListFilters = {}) {
   return useInfiniteQuery({
     queryKey: qk.blog.list(filters),
@@ -58,10 +73,21 @@ export function useBlog(slug: string, opts: { enabled?: boolean } = {}) {
   });
 }
 
+// ── Admin hooks ──────────────────────────────────────────────
+
+export function useAdminBlogList(filters: ListFilters = {}) {
+  return useInfiniteQuery({
+    queryKey: [...qk.blog.all, "admin", "list", filters],
+    queryFn: ({ pageParam }) => fetchAdminBlogList({ ...filters, cursor: pageParam as string | undefined }),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (last) => last.nextCursor ?? undefined,
+  });
+}
+
 export function useCreateBlog() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (input: Partial<BlogPost>) => api.request<BlogPost>("/api/v1/blog", { method: "POST", body: input }),
+    mutationFn: (input: Partial<BlogPost>) => api.request<BlogPost>("/api/v1/blog/admin", { method: "POST", body: input }),
     onSuccess: () => qc.invalidateQueries({ queryKey: qk.blog.all }),
   });
 }
@@ -70,7 +96,7 @@ export function useUpdateBlog() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: ({ id, ...input }: { id: string } & Partial<BlogPost>) =>
-      api.request<BlogPost>(`/api/v1/blog/${id}`, { method: "PATCH", body: input }),
+      api.request<BlogPost>(`/api/v1/blog/admin/${id}`, { method: "PUT", body: input }),
     onSuccess: () => qc.invalidateQueries({ queryKey: qk.blog.all }),
   });
 }
@@ -78,7 +104,7 @@ export function useUpdateBlog() {
 export function useDeleteBlog() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (id: string) => api.request<void>(`/api/v1/blog/${id}`, { method: "DELETE" }),
+    mutationFn: (id: string) => api.request<void>(`/api/v1/blog/admin/${id}`, { method: "DELETE" }),
     onSuccess: () => qc.invalidateQueries({ queryKey: qk.blog.all }),
   });
 }
