@@ -44,7 +44,7 @@ export function ServiceForm({ initial }: { initial?: Service }) {
           body: { type: "doc", content: [{ type: "paragraph" }] },
           iconKey: "",
           order: 0,
-          published: false,
+          published: true,
           seoTitle: "",
           seoDescription: "",
           ogImage: "",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -15,24 +15,11 @@ interface NavLink {
   children?: { label: string; href: string }[];
 }
 
-const LINKS: NavLink[] = [
-  { label: "About", href: "/about" },
-  { label: "Careers", href: "/careers" },
-  {
-    label: "Solutions",
-    href: "/services",
-    children: [
-      { label: "Overview", href: "/services" },
-      { label: "VAPT", href: "/services/vapt" },
-      { label: "Mobile (Flutter)", href: "/services/mobile-flutter" },
-      { label: "Web platforms", href: "/services/web-apps" },
-    ],
-  },
-  {
-    label: "Research",
-    href: "/blog",
-    children: [{ label: "Blog", href: "/blog" }],
-  },
+const FALLBACK_SERVICE_LINKS: { label: string; href: string }[] = [
+  { label: "Overview", href: "/services" },
+  { label: "VAPT", href: "/services/vapt" },
+  { label: "Mobile (Flutter)", href: "/services/mobile-flutter" },
+  { label: "Web platforms", href: "/services/web-apps" },
 ];
 
 function BrandMark() {
@@ -62,10 +49,20 @@ function BrandMark() {
   );
 }
 
-export function SiteNav() {
+export function SiteNav({ serviceLinks }: { serviceLinks?: { label: string; href: string }[] }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navLinks = useMemo((): NavLink[] => {
+    const children = serviceLinks ?? FALLBACK_SERVICE_LINKS;
+    return [
+      { label: "About", href: "/about" },
+      { label: "Careers", href: "/careers" },
+      { label: "Solutions", href: "/services", children },
+      { label: "Research", href: "/blog", children: [{ label: "Blog", href: "/blog" }] },
+    ];
+  }, [serviceLinks]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -101,7 +98,7 @@ export function SiteNav() {
 
           {/* Desktop nav — centered */}
           <nav className="hidden items-center gap-1 md:flex">
-            {LINKS.map((link) => {
+            {navLinks.map((link) => {
               const isActive =
                 pathname === link.href ||
                 (link.href !== "/" && pathname.startsWith(link.href));
@@ -205,7 +202,7 @@ export function SiteNav() {
                   className="fixed inset-x-4 top-20 z-50 rounded-2xl border border-border/60 bg-background/80 p-6 shadow-xl backdrop-blur-xl"
                 >
                   <nav className="flex flex-col gap-0.5">
-                    {LINKS.map((link) => {
+                    {navLinks.map((link) => {
                       const isActive =
                         pathname === link.href ||
                         (link.href !== "/" && pathname.startsWith(link.href));

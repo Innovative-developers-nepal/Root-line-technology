@@ -39,8 +39,8 @@ export function useUpsertService() {
   return useMutation({
     mutationFn: (input: Partial<Service> & { id?: string }) =>
       input.id
-        ? api.request<Service>(`/api/v1/services/${input.id}`, { method: "PATCH", body: input })
-        : api.request<Service>("/api/v1/services", { method: "POST", body: input }),
+        ? api.request<Service>(`/api/v1/services/admin/${input.id}`, { method: "PUT", body: input })
+        : api.request<Service>("/api/v1/services/admin", { method: "POST", body: input }),
     onSuccess: () => qc.invalidateQueries({ queryKey: qk.service.all }),
   });
 }
@@ -48,7 +48,7 @@ export function useUpsertService() {
 export function useDeleteService() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (id: string) => api.request<void>(`/api/v1/services/${id}`, { method: "DELETE" }),
+    mutationFn: (id: string) => api.request<void>(`/api/v1/services/admin/${id}`, { method: "DELETE" }),
     onSuccess: () => qc.invalidateQueries({ queryKey: qk.service.all }),
   });
 }

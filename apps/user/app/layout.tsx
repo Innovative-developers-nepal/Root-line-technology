@@ -6,7 +6,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { buildMetadata, organizationJsonLd, websiteJsonLd, renderJsonLd } from "@rootline/seo";
 import { Providers } from "@/components/providers";
-import { SiteNav } from "@/components/site-nav";
+import { SiteNavWithServices } from "@/components/site-nav-with-services";
 import { SiteFooter } from "@/components/site-footer";
 import { CookieConsent } from "@/components/cookie-consent";
 import { IntroSplash } from "@/components/intro-splash";
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <IntroSplash />
         <Providers>
-          <SiteNav />
+          <SiteNavWithServices />
           {children}
           <SiteFooter />
           <Suspense fallback={null}>

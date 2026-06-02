@@ -53,6 +53,9 @@ export default function OverviewPage() {
     .flatMap((p) => p.items)
     .filter((j) => j.isOpen).length;
 
+  const totalJobs = jobs.data?.pages
+    .flatMap((p) => p.items).length;
+
   const newApplicants = apps.data?.pages
     .flatMap((p) => p.items)
     .filter((a) => a.status === "NEW").length;
@@ -84,6 +87,7 @@ export default function OverviewPage() {
         <StatCard
           label="Open jobs"
           value={openJobs != null ? formatNumber(openJobs) : "—"}
+          hint={totalJobs != null ? `${formatNumber(totalJobs)} total` : undefined}
           Icon={TrendingUp}
           href="/jobs"
           loading={jobs.isLoading}

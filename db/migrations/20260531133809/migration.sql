@@ -11,12 +11,10 @@ CREATE TABLE "User" (
     "twoFactorSecret" TEXT,
     "status" TEXT NOT NULL DEFAULT 'ACTIVE',
     "lastLoginAt" DATETIME,
-    "organizationId" TEXT,
     "roleId" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
     "deletedAt" DATETIME,
-    CONSTRAINT "User_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization" ("id") ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT "User_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "Role" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
@@ -70,17 +68,6 @@ CREATE TABLE "RefreshToken" (
     "isBlacklisted" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "RefreshToken_userID_fkey" FOREIGN KEY ("userID") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
-);
-
--- CreateTable
-CREATE TABLE "Organization" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "name" TEXT NOT NULL,
-    "slug" TEXT NOT NULL,
-    "plan" TEXT NOT NULL DEFAULT 'STARTER',
-    "stripeCustomerId" TEXT,
-    "ownerId" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- CreateTable
@@ -138,8 +125,25 @@ CREATE TABLE "blog_posts" (
     "readTime" TEXT NOT NULL,
     "published" BOOLEAN NOT NULL DEFAULT false,
     "publishedAt" DATETIME,
+    "shareCount" INTEGER NOT NULL DEFAULT 0,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "blog_comments" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "blogPostId" TEXT NOT NULL,
+    "parentId" TEXT,
+    "authorName" TEXT NOT NULL,
+    "authorEmail" TEXT NOT NULL,
+    "userId" TEXT,
+    "content" TEXT NOT NULL,
+    "isApproved" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "blog_comments_blogPostId_fkey" FOREIGN KEY ("blogPostId") REFERENCES "blog_posts" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "blog_comments_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "blog_comments" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -242,9 +246,6 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE INDEX "User_email_idx" ON "User"("email");
 
 -- CreateIndex
-CREATE INDEX "User_organizationId_idx" ON "User"("organizationId");
-
--- CreateIndex
 CREATE INDEX "User_deletedAt_idx" ON "User"("deletedAt");
 
 -- CreateIndex
@@ -267,18 +268,6 @@ CREATE INDEX "verifications_identifier_idx" ON "verifications"("identifier");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "RefreshToken_token_key" ON "RefreshToken"("token");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Organization_slug_key" ON "Organization"("slug");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Organization_stripeCustomerId_key" ON "Organization"("stripeCustomerId");
-
--- CreateIndex
-CREATE INDEX "Organization_slug_idx" ON "Organization"("slug");
-
--- CreateIndex
-CREATE INDEX "Organization_ownerId_idx" ON "Organization"("ownerId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Role_name_key" ON "Role"("name");
@@ -312,6 +301,15 @@ CREATE INDEX "blog_posts_category_idx" ON "blog_posts"("category");
 
 -- CreateIndex
 CREATE INDEX "blog_posts_createdAt_idx" ON "blog_posts"("createdAt");
+
+-- CreateIndex
+CREATE INDEX "blog_comments_blogPostId_idx" ON "blog_comments"("blogPostId");
+
+-- CreateIndex
+CREATE INDEX "blog_comments_parentId_idx" ON "blog_comments"("parentId");
+
+-- CreateIndex
+CREATE INDEX "blog_comments_isApproved_idx" ON "blog_comments"("isApproved");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "services_slug_key" ON "services"("slug");

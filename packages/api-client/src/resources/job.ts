@@ -56,8 +56,8 @@ export function useUpsertJob() {
   return useMutation({
     mutationFn: (input: Partial<Job> & { id?: string }) =>
       input.id
-        ? api.request<Job>(`/api/v1/jobs/${input.id}`, { method: "PATCH", body: input })
-        : api.request<Job>("/api/v1/jobs", { method: "POST", body: input }),
+        ? api.request<Job>(`/api/v1/jobs/admin/${input.id}`, { method: "PUT", body: input })
+        : api.request<Job>("/api/v1/jobs/admin", { method: "POST", body: input }),
     onSuccess: () => qc.invalidateQueries({ queryKey: qk.job.all }),
   });
 }
@@ -65,7 +65,7 @@ export function useUpsertJob() {
 export function useDeleteJob() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (id: string) => api.request<void>(`/api/v1/jobs/${id}`, { method: "DELETE" }),
+    mutationFn: (id: string) => api.request<void>(`/api/v1/jobs/admin/${id}`, { method: "DELETE" }),
     onSuccess: () => qc.invalidateQueries({ queryKey: qk.job.all }),
   });
 }
