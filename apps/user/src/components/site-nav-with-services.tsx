@@ -4,10 +4,13 @@ import { SiteNav } from "./site-nav";
 export async function SiteNavWithServices() {
   try {
     const services = await fetchServiceList();
-    const serviceLinks = services.map((s) => ({
-      label: s.title,
-      href: `/services/${s.slug}`,
-    }));
+    const serviceLinks = [
+      { label: "Overview", href: "/services" },
+      ...services.map((s) => ({
+        label: s.title,
+        href: `/services/${s.slug}`,
+      })),
+    ];
     return <SiteNav serviceLinks={serviceLinks} />;
   } catch {
     return <SiteNav />;
