@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const schema = z.object({
-  NEXT_PUBLIC_API_URL: z.string().url().default("http://localhost:5000"),
+  NEXT_PUBLIC_API_URL: z.string().default("/api"),
   NEXT_PUBLIC_SITE_URL: z.string().url().default("http://localhost:3000"),
   NEXT_PUBLIC_POSTHOG_KEY: z.string().optional(),
   NEXT_PUBLIC_POSTHOG_HOST: z.string().url().optional(),

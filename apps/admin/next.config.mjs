@@ -1,6 +1,14 @@
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: "standalone",
+  basePath: "/admin",
+  outputFileTracingRoot: path.join(__dirname, "../.."),
   distDir: process.env.NEXT_DIST_DIR || ".next",
   transpilePackages: [
     "@rootline/ui",
@@ -16,7 +24,7 @@ const nextConfig = {
   ],
   images: {
     remotePatterns: [
-      { protocol: "http",  hostname: "localhost" },
+      { protocol: "http", hostname: "localhost" },
       { protocol: "https", hostname: "**.rootline.tech" },
     ],
   },
