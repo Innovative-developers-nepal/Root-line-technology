@@ -1,14 +1,13 @@
-import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
 export default defineConfig({
   schema: "prisma/schema.prisma",
 
   migrations: {
-    path: "../../db/migrations",
+    path: "prisma/migrations",
     seed: "npx tsx prisma/seed.ts",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    url: process.env["DATABASE_URL"] || "postgresql://rootline:rootline@localhost:5432/rootline",
   },
 });

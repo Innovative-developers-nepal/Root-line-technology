@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { PrismaLibSql } from "@prisma/adapter-libsql";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@prisma/client";
 import { seedRoles }       from "./seed/roles";
 import { seedPermissions } from "./seed/permissions";
@@ -8,7 +8,7 @@ import { seedBlog }        from "./seed/blog";
 import { seedCaseStudies } from "./seed/caseStudy";
 import { seedJobs } from "./seed/jobs";
 
-const adapter = new PrismaLibSql({ url: process.env.DATABASE_URL! });
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma  = new PrismaClient({ adapter });
 
 const isDemo = process.argv.includes("--demo");
