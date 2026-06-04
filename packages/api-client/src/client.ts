@@ -27,7 +27,7 @@ export function createApiClient(baseUrl: string): ApiClient {
     const res = await fetch(url, {
       method: opts.method ?? "GET",
       credentials: "include",
-      signal: opts.signal,
+      signal: opts.signal ?? AbortSignal.timeout(15_000),
       headers: {
         ...(isFormData ? {} : { "Content-Type": "application/json" }),
         ...(opts.headers ?? {}),
