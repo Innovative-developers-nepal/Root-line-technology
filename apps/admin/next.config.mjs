@@ -10,6 +10,7 @@ const nextConfig = {
   basePath: "/admin",
   outputFileTracingRoot: path.join(__dirname, "../.."),
   distDir: process.env.NEXT_DIST_DIR || ".next",
+  staticPageGenerationTimeout: 300,
   transpilePackages: [
     "@rootline/ui",
     "@rootline/config-tailwind",
@@ -22,6 +23,7 @@ const nextConfig = {
     "@rootline/seo",
     "@rootline/analytics",
   ],
+  optimizeFonts: false,
   images: {
     remotePatterns: [
       { protocol: "http", hostname: "localhost" },
