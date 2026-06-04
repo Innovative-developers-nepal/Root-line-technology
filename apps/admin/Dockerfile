@@ -31,6 +31,7 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL \
     NEXT_PUBLIC_POSTHOG_HOST=$NEXT_PUBLIC_POSTHOG_HOST \
     NEXT_DIST_DIR=.next-build
 COPY --from=pruner /app/out/full/ .
+ENV NEXT_TELEMETRY_DISABLED=1
 RUN pnpm turbo build --filter=@rootline/admin
 
 # ─────────────────────────────────────────────────────────────────────────
