@@ -23,7 +23,6 @@ const nextConfig = {
     "@rootline/seo",
     "@rootline/analytics",
   ],
-  optimizeFonts: false,
   images: {
     remotePatterns: [
       { protocol: "http", hostname: "localhost" },
