@@ -17,6 +17,7 @@ import {
 import { RichTextEditor } from "@rootline/ui/editor";
 import { useUpsertService, type Service } from "@rootline/api-client";
 import { serviceFormSchema, type ServiceFormValues } from "@/schemas/service";
+import { IconPreview } from "@/components/icon-preview";
 
 export function ServiceForm({ initial }: { initial?: Service }) {
   const router = useRouter();
@@ -108,7 +109,10 @@ export function ServiceForm({ initial }: { initial?: Service }) {
               <FormItem>
                 <FormLabel>Icon key</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="shield-check" />
+                  <div className="flex items-center gap-3">
+                    <Input {...field} placeholder="shield-check" />
+                    <IconPreview value={field.value} />
+                  </div>
                 </FormControl>
                 <FormDescription>lucide-react icon name (kebab-case).</FormDescription>
                 <FormMessage />

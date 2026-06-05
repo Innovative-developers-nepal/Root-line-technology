@@ -88,9 +88,6 @@ const LOGOS: Logo[] = [
   { name: "Microsoft", svg: MicrosoftLogo },
   { name: "Meta", svg: MetaLogo },
   { name: "LinkedIn", svg: LinkedInLogo },
-  { name: "Google", svg: GoogleLogo },
-  { name: "Amazon", svg: AmazonLogo },
-  { name: "GitHub", svg: GitHubLogo },
 ];
 
 function LogoItem({ logo }: { logo: Logo }) {
