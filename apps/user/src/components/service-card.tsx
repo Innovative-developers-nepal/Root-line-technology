@@ -1,19 +1,10 @@
 "use client";
 import Link from "next/link";
-import { ShieldCheck, Smartphone, Globe, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { cn } from "@rootline/ui/lib/cn";
 import { FadeUp } from "@rootline/ui/motion";
 import type { Service } from "@rootline/api-client";
-
-const ICON_MAP: Record<string, React.ReactNode> = {
-  vapt: <ShieldCheck className="h-6 w-6" />,
-  "mobile-flutter": <Smartphone className="h-6 w-6" />,
-  "web-apps": <Globe className="h-6 w-6" />,
-};
-
-function getIcon(slug: string) {
-  return ICON_MAP[slug] ?? <Globe className="h-6 w-6" />;
-}
+import { getServiceIcon } from "@/lib/service-icons";
 
 export function ServiceCard({
   service,
@@ -22,6 +13,7 @@ export function ServiceCard({
   service: Service;
   index: number;
 }) {
+  const Icon = getServiceIcon(service);
   return (
     <FadeUp delay={index * 0.1}>
       <Link
@@ -35,7 +27,7 @@ export function ServiceCard({
           )}
         >
           <div className="mb-5 inline-flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-            {getIcon(service.slug)}
+            <Icon className="h-6 w-6" />
           </div>
 
           <h3 className="font-display text-2xl leading-tight tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary">

@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Container, Badge } from "@rootline/ui/components";
-import { RichTextRenderer } from "@rootline/ui/editor";
 import {
   buildMetadata,
   breadcrumbJsonLd,
@@ -10,7 +7,8 @@ import {
   renderJsonLd,
   SITE,
 } from "@rootline/seo";
-import { fetchService, type Service } from "@rootline/api-client";
+import { fetchService, fetchServiceList, type Service } from "@rootline/api-client";
+import { ServiceDetail } from "@/components/service-detail";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +19,20 @@ async function getService(slug: string): Promise<Service | null> {
     return await fetchService(slug);
   } catch {
     return null;
+  }
+}
+
+async function getRelatedServices(
+  currentSlug: string,
+  currentTitle: string,
+): Promise<Service[]> {
+  try {
+    const all = await fetchServiceList();
+    return all.filter(
+      (s) => s.slug !== currentSlug && s.title !== currentTitle,
+    );
+  } catch {
+    return [];
   }
 }
 
@@ -40,38 +52,11 @@ export default async function ServiceDetailPage({ params }: Props) {
   const service = await getService(slug);
   if (!service) notFound();
 
+  const related = await getRelatedServices(service.slug, service.title);
+
   return (
-    <main className="min-h-dvh">
-      <div className="border-b">
-        <Container size="md" className="py-4">
-          <Link
-            href="/services"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            &larr; All Services
-          </Link>
-        </Container>
-      </div>
-
-      <Container size="md" className="py-16">
-        <Badge variant="secondary">
-          {service.iconKey ?? "Service"}
-        </Badge>
-
-        <h1 className="mt-6 font-display text-4xl leading-tight tracking-tight md:text-5xl">
-          {service.title}
-        </h1>
-
-        <p className="mt-4 text-lg text-muted-foreground md:text-xl">
-          {service.summary}
-        </p>
-      </Container>
-
-      <Container size="md" className="pb-24">
-        <article className="prose prose-neutral dark:prose-invert max-w-none">
-          <RichTextRenderer content={service.body as Record<string, unknown>} />
-        </article>
-      </Container>
+    <>
+      <ServiceDetail service={service} related={related} />
 
       <script
         type="application/ld+json"
@@ -90,6 +75,6 @@ export default async function ServiceDetailPage({ params }: Props) {
           ),
         }}
       />
-    </main>
+    </>
   );
 }

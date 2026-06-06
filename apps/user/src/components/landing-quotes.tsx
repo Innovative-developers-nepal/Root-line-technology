@@ -7,12 +7,11 @@ import { usePrefersReducedMotion } from "@rootline/ui/motion";
 // NOTE: placeholder testimonials — swap for real client quotes before launch.
 const TESTIMONIALS = [
   {
-    quote:
-      "Rootline's audit surfaced a token-handling flaw two other firms had signed off on. They don't check boxes — they think like attackers.",
-    name: "Priya Nair",
-    role: "VP Engineering",
-    company: "Northwind Logistics",
-    initials: "PN",
+    quote:"Rootline transformed my electronics business with a seamless website for product sales and service bookings.",
+    name: "Ramesh Sir",
+    role: "Proprietor",
+    company: "A2Z Electronics",
+    initials: "RS",
   },
   {
     quote:
