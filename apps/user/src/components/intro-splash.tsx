@@ -55,7 +55,7 @@ export function IntroSplash() {
   };
 
   useEffect(() => {
-    if (reduced || process.env.NODE_ENV === "development") {
+    if (reduced) {
       releaseIntro();
       return;
     }

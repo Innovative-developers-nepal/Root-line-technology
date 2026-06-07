@@ -65,7 +65,7 @@ function toKebab(str: string): string {
 }
 
 export function IconPreview({ value }: { value: string | undefined }) {
-  const key = toKebab(value);
+  const key = toKebab(value as string);
   const Icon: LucideIcon | undefined = key ? ICON_MAP[key] : undefined;
 
   return (
