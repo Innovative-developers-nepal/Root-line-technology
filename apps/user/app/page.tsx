@@ -3,7 +3,7 @@ import { buildMetadata, breadcrumbJsonLd, renderJsonLd, SITE } from "@rootline/s
 import { LandingHero } from "@/components/landing-hero";
 import { LandingLogos } from "@/components/landing-logos";
 import { LandingQuotes } from "@/components/landing-quotes";
-import { LandingFeatures } from "@/components/landing-features";
+// import { LandingFeatures } from "@/components/landing-features";
 import { LandingCTA } from "@/components/landing-cta";
 
 export const metadata: Metadata = buildMetadata({
@@ -18,7 +18,7 @@ export default function HomePage() {
       <LandingHero />
       <LandingLogos />
       <LandingQuotes />
-      <LandingFeatures />
+      {/* <LandingFeatures /> */}
       <LandingCTA />
       <script
         type="application/ld+json"

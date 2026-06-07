@@ -20,7 +20,7 @@ const TEAM_PLACEHOLDER = [
     bio: "Sets product strategy and owns client outcomes. Defines the engineering standards Rootline ships against and steers the company's long-term direction.",
     focus: ["Strategy", "Product", "Systems design"],
     links: {
-      github: "https://github.com/",
+      github: "https://github.com/bhattaraiprazwall",
       linkedin: "https://www.linkedin.com/",
     },
   },
@@ -79,6 +79,18 @@ const TEAM_PLACEHOLDER = [
     icon: "monitor" as const,
     bio: "Ships end-to-end features across frontend and backend. Previously at Cloco, bringing production experience from a larger engineering organization into Rootline's product work.",
     focus: ["React", "Next.js", "Node.js"],
+    links: {
+      github: "https://github.com/",
+    },
+  }
+  ,
+  {
+    name: "Pratikshya Ale Magar",
+    role: "HR Manager",
+    image: "/team/pam.jpeg",
+    icon: "monitor" as const,
+    bio: "Leads human resources and people operations at Rootline Technology, supporting talent development, team collaboration, and a positive workplace culture that empowers employees to grow and succeed.",
+    focus: ["Communication,Collaboration,Positive Workplace Culture"],
     links: {
       github: "https://github.com/",
     },

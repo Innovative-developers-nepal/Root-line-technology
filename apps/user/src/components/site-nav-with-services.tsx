@@ -1,18 +1,12 @@
-import { fetchServiceList } from "@rootline/api-client";
 import { SiteNav } from "./site-nav";
 
-export async function SiteNavWithServices() {
-  try {
-    const services = await fetchServiceList();
-    const serviceLinks = [
-      { label: "Overview", href: "/services" },
-      ...services.map((s) => ({
-        label: s.title,
-        href: `/services/${s.slug}`,
-      })),
-    ];
-    return <SiteNav serviceLinks={serviceLinks} />;
-  } catch {
-    return <SiteNav />;
-  }
+const SERVICE_LINKS = [
+  { label: "Overview", href: "/services" },
+  { label: "VAPT", href: "/services/vapt" },
+  { label: "Mobile Development", href: "/services/mobile-flutter" },
+  { label: "Web Development", href: "/services/web-apps" },
+];
+
+export function SiteNavWithServices() {
+  return <SiteNav serviceLinks={SERVICE_LINKS} />;
 }
