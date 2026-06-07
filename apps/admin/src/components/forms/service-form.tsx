@@ -109,7 +109,7 @@ export function ServiceForm({ initial }: { initial?: Service }) {
               <FormItem>
                 <FormLabel>Icon key</FormLabel>
                 <FormControl>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3">log
                     <Input {...field} placeholder="shield-check" />
                     <IconPreview value={field.value} />
                   </div>

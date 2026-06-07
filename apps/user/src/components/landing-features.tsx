@@ -192,17 +192,17 @@ export function LandingFeatures() {
   return (
     <section id="what-we-do" className="relative w-full scroll-mt-20 py-24 md:py-32 overflow-hidden">
       <Container>
-        <FadeUp>
+        {/* <FadeUp>
           <SectionHeading
             eyebrow="What we do"
             title="Systems designed to endure."
             description="Security, mobile, and web platforms engineered for resilience. Every engagement scoped in writing, reviewed by a human, shipped under NDA."
           />
-        </FadeUp>
+        </FadeUp> */}
 
         <div className="mt-14 flex flex-col gap-5 md:mt-16 md:gap-6">
           {/* Featured service */}
-          <FadeUp>
+          {/* <FadeUp>
             <a
               href={featured.href ?? "#"}
               className="group block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -266,10 +266,10 @@ export function LandingFeatures() {
                 </div>
               </SpotlightCard>
             </a>
-          </FadeUp>
+          </FadeUp> */}
 
           {/* Remaining services — even row */}
-          <div className="grid gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
+          {/* <div className="grid gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
             {rest.map((f) => (
               <FadeUp key={f.title}>
                 <a
@@ -311,7 +311,7 @@ export function LandingFeatures() {
                 </a>
               </FadeUp>
             ))}
-          </div>
+          </div> */}
         </div>
       </Container>
     </section>

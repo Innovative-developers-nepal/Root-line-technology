@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import {
   buildMetadata,
   breadcrumbJsonLd,
@@ -7,52 +6,70 @@ import {
   renderJsonLd,
   SITE,
 } from "@rootline/seo";
-import { fetchService, fetchServiceList, type Service } from "@rootline/api-client";
+import type { Service } from "@rootline/api-client";
 import { ServiceDetail } from "@/components/service-detail";
 
-export const dynamic = "force-dynamic";
+export function generateStaticParams() {
+  return [{ slug: "vapt" }, { slug: "mobile-flutter" }, { slug: "web-apps" }];
+}
+
+const SERVICES: Service[] = [
+  {
+    id: "vapt",
+    slug: "vapt",
+    title: "VAPT",
+    summary: "Vulnerability Assessment & Penetration Testing",
+    body: null as unknown as Record<string, unknown>,
+    iconKey: "shield-check",
+    order: 0,
+    published: true,
+    createdAt: "",
+    updatedAt: "",
+  },
+  {
+    id: "mobile-flutter",
+    slug: "mobile-flutter",
+    title: "Mobile Development",
+    summary: "Cross-platform mobile apps built with Flutter",
+    body: null as unknown as Record<string, unknown>,
+    iconKey: "smartphone",
+    order: 1,
+    published: true,
+    createdAt: "",
+    updatedAt: "",
+  },
+  {
+    id: "web-apps",
+    slug: "web-apps",
+    title: "Web Development",
+    summary: "Production web platforms built with Next.js",
+    body: null as unknown as Record<string, unknown>,
+    iconKey: "globe",
+    order: 2,
+    published: true,
+    createdAt: "",
+    updatedAt: "",
+  },
+];
 
 type Props = { params: Promise<{ slug: string }> };
 
-async function getService(slug: string): Promise<Service | null> {
-  try {
-    return await fetchService(slug);
-  } catch {
-    return null;
-  }
-}
-
-async function getRelatedServices(
-  currentSlug: string,
-  currentTitle: string,
-): Promise<Service[]> {
-  try {
-    const all = await fetchServiceList();
-    return all.filter(
-      (s) => s.slug !== currentSlug && s.title !== currentTitle,
-    );
-  } catch {
-    return [];
-  }
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const service = await getService(slug);
+  const service = SERVICES.find((s) => s.slug === slug);
   return buildMetadata({
     title: service?.title ?? "Service",
     description: service?.summary,
     path: `/services/${slug}`,
-    image: service?.ogImage,
   });
 }
 
 export default async function ServiceDetailPage({ params }: Props) {
   const { slug } = await params;
-  const service = await getService(slug);
-  if (!service) notFound();
+  const service = SERVICES.find((s) => s.slug === slug);
+  if (!service) return null;
 
-  const related = await getRelatedServices(service.slug, service.title);
+  const related = SERVICES.filter((s) => s.slug !== slug);
 
   return (
     <>
