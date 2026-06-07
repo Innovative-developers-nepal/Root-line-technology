@@ -61,6 +61,7 @@ export function SiteNav({ serviceLinks }: { serviceLinks?: { label: string; href
       { label: "Careers", href: "/careers" },
       { label: "Solutions", href: "/services", children },
       { label: "Research", href: "/blog", children: [{ label: "Blog", href: "/blog" }] },
+      { label: "Product", href: "/product" },
     ];
   }, [serviceLinks]);
 
@@ -89,7 +90,7 @@ export function SiteNav({ serviceLinks }: { serviceLinks?: { label: string; href
         <div
           className={cn(
             "flex items-center justify-between transition-all duration-300",
-          "h-21",
+            "h-21",
           )}
         >
           <div className="flex flex-1 items-center">
