@@ -21,7 +21,7 @@ const TEAM_PLACEHOLDER = [
     focus: ["Strategy", "Product", "Systems design"],
     links: {
       github: "https://github.com/bhattaraiprazwall",
-      linkedin: "https://www.linkedin.com/",
+      linkedin: "https://www.linkedin.com/in/prajwal-bhattarai-3a28a8248/",
     },
   },
   {
@@ -32,8 +32,8 @@ const TEAM_PLACEHOLDER = [
     bio: "Leads engineering across Rootline's products and shapes how systems are designed, secured, and scaled. Open-source contributor to Microsoft and LinkedIn, with a focus on cybersecurity and production-grade infrastructure.",
     focus: ["Cybersecurity", "AWS", "Kubernetes"],
     links: {
-      github: "https://github.com/",
-      linkedin: "https://www.linkedin.com/",
+      github: "https://github.com/SajanGhimire1",
+      linkedin: "https://www.linkedin.com/in/54j4n/",
     },
   },
   {
@@ -45,7 +45,8 @@ const TEAM_PLACEHOLDER = [
     bio: "Co-founder leading backend engineering at Rootline. Designs the APIs, services, and data pipelines that keep our products reliable, observable, and ready to scale.",
     focus: ["Node.js", "PostgreSQL", "Distributed systems"],
     links: {
-      github: "https://github.com/",
+      github: "https://github.com/Nabeen-Thapa",
+      linkedin:"https://www.linkedin.com/in/nabinthapa123/"
     },
   },
   {
@@ -57,7 +58,8 @@ const TEAM_PLACEHOLDER = [
     bio: "Co-founder running delivery at Rootline. Owns scope, timelines, and stakeholder communication so engineering ships on time and clients always know where things stand.",
     focus: ["Delivery", "Planning", "Client success"],
     links: {
-      github: "https://github.com/",
+      github: "https://github.com/Poshanbista",
+      linkedin:"https://www.linkedin.com/in/poshan-bista-bb1064349/"
     },
   },
   {
@@ -69,7 +71,8 @@ const TEAM_PLACEHOLDER = [
     bio: "Founder and Product Engineer focused on building scalable products from idea to production, with expertise in full-stack development, system architecture, cloud infrastructure, and AI-driven solutions",
     focus: ["End-to-end delivery", "Architecture", "Product engineering"],
     links: {
-      github: "https://github.com/",
+      github: "https://github.com/ashim086",
+      linkedin:"https://www.linkedin.com/in/ashim-thapamagar-875090360/"
     },
   },
   {
@@ -80,7 +83,8 @@ const TEAM_PLACEHOLDER = [
     bio: "Ships end-to-end features across frontend and backend. Previously at Cloco, bringing production experience from a larger engineering organization into Rootline's product work.",
     focus: ["React", "Next.js", "Node.js"],
     links: {
-      github: "https://github.com/",
+      github: "https://github.com/imnishalmc",
+      linkedin:"https://www.linkedin.com/in/nisha-lamichhane/"
     },
   }
   ,
@@ -92,7 +96,18 @@ const TEAM_PLACEHOLDER = [
     bio: "Leads human resources and people operations at Rootline Technology, supporting talent development, team collaboration, and a positive workplace culture that empowers employees to grow and succeed.",
     focus: ["Communication,Collaboration,Positive Workplace Culture"],
     links: {
-      github: "https://github.com/",
+      linkedin: "https://www.linkedin.com/in/pratikshyaalemagar223/",
+    },
+  },
+  {
+    name: "Meyssa Zeydi",
+    role: "Jr.Penetration Tester",
+    image: "/team/mz.png",
+    icon: "monitor" as const,
+    bio: "Supports cybersecurity initiatives at Rootline Technology as a Jr. Penetration Tester, helping identify security vulnerabilities, assess system defenses, and contribute to maintaining a secure and resilient technology environment through continuous testing and analysis.",
+    focus: ["Vulnerability Assessment,Penetration Testing,Security Analysis"],
+    links: {
+      
     },
   }
 ];

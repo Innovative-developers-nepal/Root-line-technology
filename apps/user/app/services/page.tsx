@@ -211,7 +211,7 @@ export default function ServicesPage() {
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="rounded-2xl uppercase tracking-wider">
-                  <Link href="/work">
+                  <Link href="/product">
                     See Our Work
                   </Link>
                 </Button>

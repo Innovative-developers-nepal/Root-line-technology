@@ -10,7 +10,7 @@ export const SITE = {
   twitter: "@rootlinetech",
   locale: "en_US",
   contact: {
-    email: "hello@rootline.tech",
+    email: "rootlinetechnology@gmail.com",
     phone: "",
     address: process.env.COMPANY_ADDRESS ?? "Kathmandu, Nepal",
     geo: {
