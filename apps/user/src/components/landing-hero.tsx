@@ -48,10 +48,10 @@ export function LandingHero() {
 
             <motion.div {...rise(0.4)} className="mt-10 flex flex-wrap items-center gap-3">
               <Button asChild variant="outline" size="lg">
-                <a href="/work">Explore work</a>
+                <a href="/product">Explore work</a>
               </Button>
               <Button asChild variant="ghost" size="lg">
-                <a href="/philosophy">Our philosophy</a>
+                {/* <a href="/philosophy">Our philosophy</a> */}
               </Button>
             </motion.div>
           </div>
