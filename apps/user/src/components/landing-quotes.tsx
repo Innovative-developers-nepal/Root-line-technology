@@ -8,35 +8,35 @@ import { usePrefersReducedMotion } from "@rootline/ui/motion";
 const TESTIMONIALS = [
   {
     quote:"Rootline transformed my electronics business with a seamless website for product sales and service bookings.",
-    name: "Ramesh Sir",
+    name: "Shyam Kumar Maharjan",
     role: "Proprietor",
     company: "A2Z Electronics",
     initials: "RS",
   },
-  {
-    quote:
-      "We rebuilt payments on the architecture they designed and haven't had a single security incident in 18 months. That's the whole story.",
-    name: "Daniel Osei",
-    role: "CTO",
-    company: "Lumen Health",
-    initials: "DO",
-  },
-  {
-    quote:
-      "The most thorough VAPT engagement we've run. Clear reporting, real remediation guidance, zero fluff. Our board finally understood our risk.",
-    name: "Sara Kim",
-    role: "Head of Security",
-    company: "Meridian Bank",
-    initials: "SK",
-  },
-  {
-    quote:
-      "They treat our codebase like it's their own. It's rare to find a partner this invested in getting the hard parts right.",
-    name: "Marcus Feld",
-    role: "Founder",
-    company: "Cartwheel",
-    initials: "MF",
-  },
+  // {
+  //   quote:
+  //     "We rebuilt payments on the architecture they designed and haven't had a single security incident in 18 months. That's the whole story.",
+  //   name: "Daniel Osei",
+  //   role: "CTO",
+  //   company: "Lumen Health",
+  //   initials: "DO",
+  // },
+  // {
+  //   quote:
+  //     "The most thorough VAPT engagement we've run. Clear reporting, real remediation guidance, zero fluff. Our board finally understood our risk.",
+  //   name: "Sara Kim",
+  //   role: "Head of Security",
+  //   company: "Meridian Bank",
+  //   initials: "SK",
+  // },
+  // {
+  //   quote:
+  //     "They treat our codebase like it's their own. It's rare to find a partner this invested in getting the hard parts right.",
+  //   name: "Marcus Feld",
+  //   role: "Founder",
+  //   company: "Cartwheel",
+  //   initials: "MF",
+  // },
 ];
 
 export function LandingQuotes() {
