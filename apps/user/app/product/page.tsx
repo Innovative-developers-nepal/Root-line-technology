@@ -66,9 +66,6 @@ const products = [
     image: "/product/a2z.jpeg",
     link:"https://www.a2zelectricmarmat.com/",
   },
-  {
-    project_name:""
-  }
 ];
 
 export default function ProductPage() {
