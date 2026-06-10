@@ -35,11 +35,7 @@ export const SERVICE_COVERAGE: Record<string, CoverageArea[]> = {
       description:
         "Audit smart contracts and decentralized applications for security issues.",
     },
-    {
-      title: "IoT VAPT",
-      description:
-        "Identify and mitigate vulnerabilities in connected IoT devices using OWASP IoT Top 10.",
-    },
+   
   ],
   "mobile-flutter": [
     {

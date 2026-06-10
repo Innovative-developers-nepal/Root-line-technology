@@ -140,7 +140,7 @@ const ECOSYSTEM_ITEMS = [
     icon: ShieldCheck,
     title: "VAPT",
     description: "Vulnerability Assessment & Penetration Testing",
-    tags: ["OWASP", "Web", "Mobile", "Network", "Cloud", "Web3", "IoT"],
+    tags: ["OWASP Top 10", "Web", "Mobile", "Network", "Cloud", "Web3"],
   },
   {
     slug: "mobile-flutter",
